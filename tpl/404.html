@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="{{tpl:BlogLanguage}}">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots robots="NOINDEX,NOARCHIVE"}}" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="{{tpl:BlogEditor encode_html="1"}}" />
+	
+	<title>{{tpl:lang Document not found}} - {{tpl:BlogName encode_html="1"}}</title>
+	
+	<link rel="top" href="{{tpl:BlogURL}}" title="{{tpl:lang Home}}" />
+	<link rel="contents" title="{{tpl:lang Archives}}" href="{{tpl:BlogArchiveURL}}" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{tpl:BlogFeedURL type="atom"}}" />
+
+	{{tpl:include src="_head.html"}}
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="dc-404">
+
+	{{tpl:include src="_top.html"}}
+	
+    <!-- Intro Header -->
+        <header class="intro">		
+		<div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading"><i class="fa fa-exclamation-circle"></i> {{tpl:lang Document not found}}</h1>
+                        <div class="intro-text"><p>{{tpl:lang The document you are looking for does not exist.}}</p>
+                    </div>
+					<div class="intro-footer col-md-8 col-md-offset-2">
+						
+						<ul class="rss">
+						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom" title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Entries feed}}</a></li>
+
+						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
+						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments" title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
+						</tpl:SysIf>
+						</ul>
+						                        
+						
+						<a href="#content" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+    </header>
+
+    <!-- Content Section -->
+    <section id="content" class="container content-section text-center" role="main">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+				<div class="post">
+					<h2 class="post-title">{{tpl:lang Suggestions:}}</h2>
+					<div class="post-content">
+						<ul>
+							<li><a href="{{tpl:BlogURL}}">{{tpl:lang Go to homepage}}</a></li>
+							<li><a href="#search">{{tpl:lang Use search form}}</a></li>
+							<li><a href="{{tpl:BlogURL}}archive">{{tpl:lang Explore archives}}</a></li>
+						</ul>
+					</div>
+				</div>
+				<p><a href="#page-top" class="btn btn-circle page-scroll up"><i class="fa fa-angle-double-up animated"></i></a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menubar Section -->
+	{{tpl:include src="_menubar.html"}}
+
+    <!-- Footer -->
+    {{tpl:include src="_footer.html"}}
+
+</body>
+
+</html>

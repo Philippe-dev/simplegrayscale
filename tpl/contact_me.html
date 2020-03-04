@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="{{tpl:BlogLanguage}}">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots robots="NOINDEX,NOARCHIVE"}}" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="{{tpl:BlogEditor encode_html="1"}}" />
+	
+	<title>{{tpl:ContactMePageTitle encode_html="1"}} - {{tpl:BlogName encode_html="1"}}</title>
+	<meta name="description" content="{{tpl:ContactMeFormCaption}}" />
+	<link rel="contents" title="{{tpl:lang Archives}}" href="{{tpl:BlogArchiveURL}}" />
+
+	{{tpl:include src="_head.html"}}
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="dc-contactme">
+
+	{{tpl:include src="_top.html"}}
+	
+    <!-- Intro Header -->
+    <header class="intro">		
+		<div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading"><i class="fa fa-envelope-o"></i> {{tpl:ContactMePageTitle encode_html="1"}}</h1>
+                        <div class="intro-text">{{tpl:ContactMeFormCaption}}</div>
+                    </div>
+					<div class="intro-footer col-md-8 col-md-offset-2">
+						
+						<ul class="rss">
+						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom" title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Entries feed}}</a></li>
+
+						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
+						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments" title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
+						</tpl:SysIf>
+						</ul>
+						                        
+						
+						<a href="#content" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+    </header>
+
+    <!-- Content Section -->
+    <section id="content" class="container content-section text-center" role="main">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+				<article class="post">
+				<tpl:ContactMeIf sent="1">{{tpl:ContactMeMsgSuccess}}</tpl:ContactMeIf>
+
+				<tpl:ContactMeIf error="1">{{tpl:ContactMeMsgError}}</tpl:ContactMeIf>
+
+				<tpl:ContactMeIf sent="0">
+				
+				<form action="{{tpl:ContactMeURL}}#content" method="post" id="comment-form" class="contactme">
+				  <fieldset>
+					<p class="field"><label for="c_name">{{tpl:lang Name or nickname}}&nbsp;:</label>
+					<input name="c_name" id="c_name" type="text" size="30" maxlength="255"
+					value="{{tpl:ContactMeName encode_html="1"}}" />
+					</p>
+
+					<p class="field"><label for="c_mail">{{tpl:lang Email address}}&nbsp;:</label>
+					<input name="c_mail" id="c_mail" type="text" size="30" maxlength="255"
+					value="{{tpl:ContactMeEmail encode_html="1"}}" />
+					</p>
+
+					<p class="field"><label for="c_site">{{tpl:lang Website}}
+					({{tpl:lang optional}})&nbsp;:</label>
+					<input name="c_site" id="c_site" type="text" size="30" maxlength="255"
+					value="{{tpl:ContactMeSite encode_html="1"}}" />
+					</p>
+
+					<p class="field"><label for="c_subject">{{tpl:lang Subject}}&nbsp;:</label>
+					<input name="c_subject" id="c_subject" type="text" size="30" maxlength="255"
+					value="{{tpl:ContactMeSubject encode_html="1"}}" />
+					</p>
+
+					<p style="display:none"><input name="f_mail" type="text" size="30"
+					maxlength="255" value="" /></p>
+
+					<p class="field"><label for="c_message">{{tpl:lang Message}}&nbsp;:</label>
+					<textarea name="c_message" id="c_message" cols="35"
+					rows="7">{{tpl:ContactMeMessage raw="1" encode_html="1"}}</textarea>
+					</p>
+
+					<p><input type="submit"  class="btn btn-default btn-lgw" value="{{tpl:lang send}}" /></p>
+				  </fieldset>
+				</form>
+				</tpl:ContactMeIf>
+				</article>
+				<p><a href="#page-top" class="btn btn-circle page-scroll up"><i class="fa fa-angle-double-up animated"></i></a></p>
+				
+			</div>
+        </div>
+    </section>
+
+    <!-- Menubar Section -->
+	{{tpl:include src="_menubar.html"}}
+
+    <!-- Footer -->
+    {{tpl:include src="_footer.html"}}
+
+</body>
+
+</html>

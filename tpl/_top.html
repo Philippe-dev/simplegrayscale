@@ -1,0 +1,26 @@
+<!-- Navigation -->
+<nav class="navbar navbar-custom navbar-fixed-top">
+	<div class="container">
+		
+		<ul id="prelude">
+			<li><a href="#content">{{tpl:lang To content}}</a></li>
+			<li><a href="#menubar">{{tpl:lang To menu}}</a></li>
+			<li><a href="#search">{{tpl:lang To search}}</a></li>
+		</ul>
+		
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+				<i class="fa fa-bars"></i>
+			</button>
+			<a class="navbar-brand" href="{{tpl:BlogURL}}"><i class="fa fa-leaf"></i> {{tpl:BlogName encode_html="1"}}</a>
+		</div>
+		
+		<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+		{{tpl:SimpleMenu class="nav navbar-nav" description="title"}}
+		</div>
+		
+	</div>
+</nav>
+
+<!-- # --BEHAVIOR-- publicTopAfterContent -->
+{{tpl:SysBehavior behavior="publicTopAfterContent"}}
