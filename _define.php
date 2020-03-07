@@ -1,6 +1,6 @@
 <?php
 /**
- * @brief Grayscale, a theme for Dotclear 2
+ * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
