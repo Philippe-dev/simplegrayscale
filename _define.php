@@ -1,23 +1,29 @@
 <?php
-# -- BEGIN LICENSE BLOCK ---------------------------------------
-# This file is part of Grayscale, a theme for Dotclear
-#
-# Copyright (c) 2015 - Association Dotclear
-# Licensed under the GPL version 2.0 license.
-# See LICENSE file or
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-#
-# -- END LICENSE BLOCK -----------------------------------------
+/**
+ * @brief Grayscale, a theme for Dotclear 2
+ *
+ * @package Dotclear
+ * @subpackage Themes
+ *
+ * @author Start Bootstrap and Philippe aka amalgame
+ *
+ * @copyright Philippe Hénaff philippe@dissitou.org
+ * @copyright GPL-2.0
+ */
 
-if (!defined('DC_RC_PATH')) { return; }
+if (!defined('DC_RC_PATH')) {
+    return;
+}
 
 $this->registerModule(
-	/* Name */				"Simple Grayscale",
-	/* Description*/		"Simple Grayscale Bootstrap theme for Dotclear",
-	/* Author */			"Start Bootstrap and Philippe aka amalgame",
-	/* Version */			'1.6.0',
-	/* Properties */		array(
-								'type' => 'theme',
-								'tplset' => 'mustek'
-							)
+    "Simple Grayscale",                           		// Name
+    "Simple Grayscale Bootstrap theme for Dotclear",  	// Description
+    "Start Bootstrap and Philippe aka amalgame",        // Author
+    '1.6.0',                                     		// Version
+    [                                          			// Properties
+        'requires'          => [['core', '2.16']], 		// Dependencies
+        'standalone_config' => true,
+        'type'              => 'theme',
+        'tplset' 			=> 'mustek'
+    ]
 );
