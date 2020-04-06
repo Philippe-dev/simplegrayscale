@@ -19,7 +19,7 @@ $this->registerModule(
     "Simple Grayscale",                           		// Name
     "Simple Grayscale Bootstrap theme for Dotclear",  	// Description
     "Start Bootstrap and Philippe aka amalgame",        // Author
-    '1.6.1',                                     		// Version
+    '1.6.2',                                     		// Version
     [                                          			// Properties
         'requires'          => [['core', '2.16']], 		// Dependencies
         'standalone_config' => true,
