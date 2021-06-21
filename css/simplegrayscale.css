@@ -65,11 +65,11 @@ a {
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
+  text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  text-decoration: none;
   color: #555
 }
 
