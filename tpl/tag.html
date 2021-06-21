@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots}}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="author" content="{{tpl:BlogEditor encode_html="1"}}" />
@@ -35,49 +35,34 @@
 	{{tpl:include src="_head.html"}}
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="dc-tag">
+<body id="page-top" class="dc-tag">
 
 	{{tpl:include src="_top.html"}}
-	
-    <!-- Intro Header -->
-    <header class="intro">
-        
-		
-		<div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    
-					<div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading"><i class="fa fa-tags"></i> {{tpl:lang Tag}} : {{tpl:TagID}}</h1>
-						<p class="intro-text"><a href="{{tpl:BlogURL}}tags">{{tpl:lang All tags}}</a></p>					
-                    </div>
+
+	<!-- Intro Header -->
+	<header class="intro">
+		<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+			<div class="d-flex justify-content-center">
+				<div class="text-center">
+					<h1 class="mx-auto my-0 text-uppercase"><i class="fa fa-tags"></i> {{tpl:lang Tag}} : {{tpl:TagID}}</h1>
+					<p class="text-white"><a href="{{tpl:BlogURL}}tags">{{tpl:lang All tags}}</a></p>
 					
-					<div class="intro-footer col-md-8 col-md-offset-2">
-						
-						<ul class="rss">
+					<ul class="rss intro-footer">
 						<li><a type="application/atom+xml" href="{{tpl:TagFeedURL type="atom"}}" title="{{tpl:lang This tag's entries Atom feed}}" class="feed">{{tpl:lang Entries feed}}</a></li>
 						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
 						<li><a type="application/atom+xml" href="{{tpl:TagFeedURL type="atom"}}/comments" title="{{tpl:lang This tag's comments Atom feed}}" class="feed">{{tpl:lang Comments feed}}</a></li>
 						</tpl:SysIf>
-						</ul>
-						                       
-						
-						<a href="#content" class="btn btn-circle page-scroll">
-                            <i class="fa fa-angle-double-down animated"></i>
-                        </a>
-                    </div>
-					
-                </div>
-            </div>
-        </div>
-		
-    </header>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
 
     <!-- Content Section -->
-    <section id="content" class="container content-section text-center" role="main">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-			 
+	<section id="content" class="container px-4 px-lg-5 content-section text-center" role="main">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-lg-10">
+				<h2 class="sr-only sr-only-focusable">{{tpl:lang Entries list}}</h2>
 				<tpl:Entries>
 				<article id="p{{tpl:EntryID}}" class="post {{tpl:EntryIfOdd}} {{tpl:EntryIfFirst}}" lang="{{tpl:EntryLang}}">
 					<!-- # New day date -->
@@ -102,51 +87,68 @@
 					<!-- # --BEHAVIOR-- publicEntryAfterContent -->
 					{{tpl:SysBehavior behavior="publicEntryAfterContent"}}
 
-					<div class="post-infos col-12">
-					
-						<div class="col-lg-4 col-lg-offset-0">
+					<div class="post-infos row align-items-start">
+
+						<div class="col">
 							<p><i class="fa fa-user"></i> {{tpl:EntryAuthorLink}}</p>
 							<p><i class="fa fa-calendar"></i> {{tpl:EntryDate format="%d-%m-%Y"}}</p>
 							<tpl:EntryIf has_category="1">
-							<p><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open-o"></i> {{tpl:EntryCategory encode_html="1"}}</a></p>
+								<p><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open"></i>
+										{{tpl:EntryCategory encode_html="1"}}</a></p>
 							</tpl:EntryIf>
 						</div>
-						
-						<div class="col-lg-4 col-lg-offset-0">
+
+						<div class="col">
 							<tpl:EntryTags>
-							  <tpl:TagsHeader><p></tpl:TagsHeader>
+								<tpl:TagsHeader>
+									<p>
+								</tpl:TagsHeader>
 								<span><a href="{{tpl:TagURL}}"><i class="fa fa-tags"></i> {{tpl:TagID}}</a></span>
-							  <tpl:TagsFooter></p></tpl:TagsFooter>
+								<tpl:TagsFooter>
+									</p>
+								</tpl:TagsFooter>
 							</tpl:EntryTags>
-							
+
 						</div>
-						
-						<div class="col-lg-4 col-lg-offset-0">
-						<!-- # Number of comments, trackbacks and attachments -->
-							
+
+						<div class="col">
+							<!-- # Number of comments, trackbacks and attachments -->
+
 							<tpl:EntryIf show_comments="1">
-							<p><a href="{{tpl:EntryURL}}#post-comments" class="comment_count"><i class="fa fa-comment-o"></i> {{tpl:EntryCommentCount}}</a></p>
+								<p><a href="{{tpl:EntryURL}}#post-comments" class="comment_count"><i
+											class="fa fa-comment"></i> {{tpl:EntryCommentCount}}</a></p>
 							</tpl:EntryIf>
 							<tpl:EntryIf show_pings="1">
-							<p><a href="{{tpl:EntryURL}}#pings" class="ping_count"><i class="fa fa-comment"></i> {{tpl:EntryPingCount}}</a></p>
+								<p><a href="{{tpl:EntryURL}}#pings" class="ping_count"><i class="fa fa-comment"></i>
+										{{tpl:EntryPingCount}}</a></p>
 							</tpl:EntryIf>
 							<tpl:EntryIf has_attachment="1">
-							<p><a href="{{tpl:EntryURL}}#attachments" class="attach_count"><i class="fa fa-paperclip"></i> {{tpl:EntryAttachmentCount}}</a></p>
+								<p><a href="{{tpl:EntryURL}}#attachments" class="attach_count"><i
+											class="fa fa-paperclip"></i> {{tpl:EntryAttachmentCount}}</a></p>
 							</tpl:EntryIf>
 						</div>
 					</div>
 				</article>
 				<tpl:EntriesFooter>
-				<div class="post-footer col-12">
-					<tpl:Pagination>
-					<p class="pagination"><tpl:PaginationIf end="0"><a href="{{tpl:PaginationURL offset="+1"}}" class="btn btn-default btn-lg">&#171;
-					{{tpl:lang previous entries}}</a> - </tpl:PaginationIf>
-					{{tpl:lang page}} {{tpl:PaginationCurrent}} {{tpl:lang of}} {{tpl:PaginationCounter}}
-					<tpl:PaginationIf start="0"> - <a href="{{tpl:PaginationURL offset="-1"}}" class="btn btn-default btn-lg">{{tpl:lang next entries}}
-					&#187;</a></tpl:PaginationIf></p>
-					</tpl:Pagination>
-				</div>
-				</tpl:EntriesFooter>
+						<div class="post-footer row align-items-start">
+							<tpl:Pagination>
+								<div class="col">
+									<tpl:PaginationIf end="0"><a href="{{tpl:PaginationURL offset=" +1"}}"
+											class="btn btn-default btn-lg">&#171;
+											{{tpl:lang previous entries}}</a></tpl:PaginationIf>
+								</div>
+								<div class="col">
+									{{tpl:lang page}} {{tpl:PaginationCurrent}} {{tpl:lang of}}
+									{{tpl:PaginationCounter}}
+								</div>
+								<div class="col">
+									<tpl:PaginationIf start="0"><a href="{{tpl:PaginationURL offset=" -1"}}"
+											class="btn btn-default btn-lg">{{tpl:lang next entries}}
+											&#187;</a></tpl:PaginationIf>
+								</div>
+							</tpl:Pagination>
+						</div>
+					</tpl:EntriesFooter>
 				</tpl:Entries>
 				
 				

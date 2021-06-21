@@ -3,145 +3,165 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots robots="NOINDEX"}}" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots robots=" NOINDEX"}}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="{{tpl:BlogEditor encode_html="1"}}" />
-	
+	<meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}" />
+
 	<title>{{tpl:lang Archives}} - {{tpl:ArchiveDate}} - {{tpl:BlogName encode_html="1"}}</title>
-	
+
 	<link rel="contents" href="{{tpl:BlogArchiveURL}}" title="{{tpl:lang Archives}}" />
 
-	<tpl:ArchiveNext><link rel="next" href="{{tpl:ArchiveURL}}"
-	title="{{tpl:ArchiveDate encode_html="1"}}" /></tpl:ArchiveNext>
-	<tpl:ArchivePrevious><link rel="prev" href="{{tpl:ArchiveURL}}"
-	title="{{tpl:ArchiveDate encode_html="1"}}" /></tpl:ArchivePrevious>
+	<tpl:ArchiveNext>
+		<link rel="next" href="{{tpl:ArchiveURL}}" title="{{tpl:ArchiveDate encode_html=" 1"}}" />
+	</tpl:ArchiveNext>
+	<tpl:ArchivePrevious>
+		<link rel="prev" href="{{tpl:ArchiveURL}}" title="{{tpl:ArchiveDate encode_html=" 1"}}" />
+	</tpl:ArchivePrevious>
 
 	<tpl:Entries no_content="1">
-	<link rel="chapter" href="{{tpl:EntryURL}}" title="{{tpl:EntryTitle encode_html="1"}}" />
+		<link rel="chapter" href="{{tpl:EntryURL}}" title="{{tpl:EntryTitle encode_html=" 1"}}" />
 	</tpl:Entries>
 
 	{{tpl:include src="_head.html"}}
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="dc-archive-month">
+<body id="page-top" class="dc-archive-month<tpl:PaginationIf start=" 0">-paginated</tpl:PaginationIf>">
 
 	{{tpl:include src="_top.html"}}
-	
-    <!-- Intro Header -->
-    <header class="intro">
-		<div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">{{tpl:ArchiveDate}}</h1>
-                        <div class="intro-text"><h2><a href="{{tpl:BlogArchiveURL}}" title="{{tpl:lang Archives}}"><i class="fa fa-calendar"></i> {{tpl:lang Archives}}</a></h2></div>
-                    </div>
-					<div class="intro-footer col-md-8 col-md-offset-2">
-						
-						<ul class="rss">
-						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom" title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Entries feed}}</a></li>
+
+	<!-- Intro Header -->
+	<header class="intro">
+		<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+			<div class="d-flex justify-content-center">
+				<div class="text-center">
+					<h1 class="mx-auto my-0 text-uppercase"><i class="fa fa-calendar"></i> {{tpl:ArchiveDate}}
+					</h1>
+					<p class="text-white"><a href="{{tpl:BlogArchiveURL}}" title="{{tpl:lang Archives}}"><i
+								class="fa fa-calendar"></i> {{tpl:lang Archives}}</a></p>
+					<ul class="rss intro-footer">
+						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom"
+								title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang
+								Entries feed}}</a></li>
 
 						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
-						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments" title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
+							<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments"
+									title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i
+										class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
 						</tpl:SysIf>
-						</ul>
-						                        
-						
-						<a href="#content" class="btn btn-circle page-scroll">
-                            <i class="fa fa-angle-double-down animated"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-    </header>
-
-    <!-- Content Section -->
-	<section id="content" class="container content-section text-center" role="main">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-				
-				<tpl:Entries>
-				<article class="post">
-				<!-- # New day date -->
-				<tpl:DateHeader><p class="day-date">{{tpl:EntryDate}}</p></tpl:DateHeader>
-
-				<h2 id="p{{tpl:EntryID}}" class="post-title" lang="{{tpl:EntryLang}}"><a
-				href="{{tpl:EntryURL}}" title="{{tpl:lang Read}} {{tpl:EntryTitle encode_html="1"}}">{{tpl:EntryTitle encode_html="1"}}</a></h2>
-				
-				<!-- # Entry with an excerpt -->
-				<tpl:EntryIf extended="1">
-				  <div class="post-content">{{tpl:EntryExcerpt}}</div>
-				  <p class="read-it"><a href="{{tpl:EntryURL}}"
-				  title="{{tpl:lang Continue reading}} {{tpl:EntryTitle encode_html="1"}}"><i class="fa fa-plus-circle"></i>  {{tpl:lang Continue
-				  reading}}</a>...</p>
-				</tpl:EntryIf>
-
-				<!-- # Entry without excerpt -->
-				<tpl:EntryIf extended="0">
-				  <div class="post-content">{{tpl:EntryContent}}</div>
-				</tpl:EntryIf>
-				
-				<div class="post-infos col-12">
-					
-						<div class="col-lg-4 col-lg-offset-0">
-							<p><i class="fa fa-user"></i> {{tpl:EntryAuthorLink}}</p>
-							<p><i class="fa fa-calendar"></i> {{tpl:EntryDate format="%d-%m-%Y"}}</p>
-							<tpl:EntryIf has_category="1">
-							<p><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open-o"></i> {{tpl:EntryCategory encode_html="1"}}</a></p>
-							</tpl:EntryIf>
-						</div>
-						
-						<div class="col-lg-4 col-lg-offset-0">
-							<tpl:EntryTags>
-							  <tpl:TagsHeader><p></tpl:TagsHeader>
-								<span><a href="{{tpl:TagURL}}"><i class="fa fa-tags"></i> {{tpl:TagID}}</a></span>
-							  <tpl:TagsFooter></p></tpl:TagsFooter>
-							</tpl:EntryTags>
-							
-						</div>
-						
-						<div class="col-lg-4 col-lg-offset-0">
-						<!-- # Number of comments, trackbacks and attachments -->
-							
-							<tpl:EntryIf show_comments="1">
-							<p><a href="{{tpl:EntryURL}}#post-comments" class="comment_count"><i class="fa fa-comment-o"></i> {{tpl:EntryCommentCount}}</a></p>
-							</tpl:EntryIf>
-							<tpl:EntryIf show_pings="1">
-							<p><a href="{{tpl:EntryURL}}#pings" class="ping_count"><i class="fa fa-comment"></i> {{tpl:EntryPingCount}}</a></p>
-							</tpl:EntryIf>
-							<tpl:EntryIf has_attachment="1">
-							<p><a href="{{tpl:EntryURL}}#attachments" class="attach_count"><i class="fa fa-paperclip"></i> {{tpl:EntryAttachmentCount}}</a></p>
-							</tpl:EntryIf>
-						</div>
-					</div>
-				
-				
-				</article>
-				</tpl:Entries>
-				
-				<div class="post-footer col-12">
-					<p id="pagination">
-					<tpl:ArchivePrevious><a href="{{tpl:ArchiveURL}}" class="prev btn btn-default btn-lg">&#171; {{tpl:ArchiveDate encode_html="1"}}</a>
-					- </tpl:ArchivePrevious>
-					<a href="{{tpl:BlogArchiveURL}}">{{tpl:lang Archives}}</a>
-					<tpl:ArchiveNext> - <a href="{{tpl:ArchiveURL}}" class="next btn btn-default btn-lg">{{tpl:ArchiveDate encode_html="1"}} &#187;</a></tpl:ArchiveNext>
-					</p>
+					</ul>
 				</div>
-				
-				<p><a href="#page-top" class="btn btn-circle page-scroll up"><i class="fa fa-angle-double-up animated"></i></a></p>
-            </div>
-        </div>
-    </section>
+			</div>
+		</div>
+	</header>
 
-    <!-- Menubar Section -->
+	<!-- Content Section -->
+	<section id="content" class="container px-4 px-lg-5 content-section text-center" role="main">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-lg-10">
+				<h2 class="sr-only sr-only-focusable">{{tpl:lang Entries list}}</h2>
+				<tpl:Entries>
+					<article class="post">
+						<!-- # New day date -->
+						<tpl:DateHeader>
+							<p class="day-date">{{tpl:EntryDate}}</p>
+						</tpl:DateHeader>
+
+						<h2 id="p{{tpl:EntryID}}" class="post-title" lang="{{tpl:EntryLang}}"><a href="{{tpl:EntryURL}}"
+								title="{{tpl:lang Read}} {{tpl:EntryTitle encode_html=" 1"}}">{{tpl:EntryTitle
+								encode_html="1"}}</a></h2>
+
+						<!-- # Entry with an excerpt -->
+						<tpl:EntryIf extended="1">
+							<div class="post-content">{{tpl:EntryExcerpt}}</div>
+							<p class="read-it"><a href="{{tpl:EntryURL}}"
+									title="{{tpl:lang Continue reading}} {{tpl:EntryTitle encode_html=" 1"}}"><i
+										class="fa fa-plus-circle"></i> {{tpl:lang Continue
+									reading}}</a>...</p>
+						</tpl:EntryIf>
+
+						<!-- # Entry without excerpt -->
+						<tpl:EntryIf extended="0">
+							<div class="post-content">{{tpl:EntryContent}}</div>
+						</tpl:EntryIf>
+
+						<div class="post-infos row align-items-start">
+
+							<div class="col">
+								<p><i class="fa fa-user"></i> {{tpl:EntryAuthorLink}}</p>
+								<p><i class="fa fa-calendar"></i> {{tpl:EntryDate format="%d-%m-%Y"}}</p>
+								<tpl:EntryIf has_category="1">
+									<p><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open"></i>
+											{{tpl:EntryCategory encode_html="1"}}</a></p>
+								</tpl:EntryIf>
+							</div>
+
+							<div class="col">
+								<tpl:EntryTags>
+									<tpl:TagsHeader>
+										<p>
+									</tpl:TagsHeader>
+									<span><a href="{{tpl:TagURL}}"><i class="fa fa-tags"></i> {{tpl:TagID}}</a></span>
+									<tpl:TagsFooter>
+										</p>
+									</tpl:TagsFooter>
+								</tpl:EntryTags>
+
+							</div>
+
+							<div class="col">
+								<!-- # Number of comments, trackbacks and attachments -->
+
+								<tpl:EntryIf show_comments="1">
+									<p><a href="{{tpl:EntryURL}}#post-comments" class="comment_count"><i
+												class="fa fa-comment"></i> {{tpl:EntryCommentCount}}</a></p>
+								</tpl:EntryIf>
+								<tpl:EntryIf show_pings="1">
+									<p><a href="{{tpl:EntryURL}}#pings" class="ping_count"><i class="fa fa-comment"></i>
+											{{tpl:EntryPingCount}}</a></p>
+								</tpl:EntryIf>
+								<tpl:EntryIf has_attachment="1">
+									<p><a href="{{tpl:EntryURL}}#attachments" class="attach_count"><i
+												class="fa fa-paperclip"></i> {{tpl:EntryAttachmentCount}}</a></p>
+								</tpl:EntryIf>
+							</div>
+						</div>
+					</article>
+
+					<tpl:EntriesFooter>
+						<div class="post-footer row align-items-start">
+
+							<div class="col">
+								<tpl:ArchivePrevious><a href="{{tpl:ArchiveURL}}"
+										class="prev btn btn-default btn-lg">&#171;
+										{{tpl:ArchiveDate encode_html="1"}}</a></tpl:ArchivePrevious>
+							</div>
+							<div class="col">
+								<a href="{{tpl:BlogArchiveURL}}">{{tpl:lang Archives}}</a>
+							</div>
+							<div class="col">
+								<tpl:ArchiveNext><a href="{{tpl:ArchiveURL}}"
+										class="next btn btn-default btn-lg">{{tpl:ArchiveDate encode_html="1"}}
+										&#187;</a>
+								</tpl:ArchiveNext>
+							</div>
+
+						</div>
+					</tpl:EntriesFooter>
+				</tpl:Entries>
+
+				<p><a href="#page-top" class="btn btn-circle page-scroll up"><i
+							class="fa fa-angle-double-up animated"></i></a></p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Menubar Section -->
 	{{tpl:include src="_menubar.html"}}
 
-    <!-- Footer -->
-    {{tpl:include src="_footer.html"}}
+	<!-- Footer -->
+	{{tpl:include src="_footer.html"}}
 
 </body>
 

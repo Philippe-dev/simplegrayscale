@@ -1,18 +1,13 @@
 @charset "UTF-8";
 /**
- * @brief Simple Grayscale, a theme for Dotclear 2
+ * @brief Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
  *
- * @author Start Bootstrap and Philippe aka amalgame
- *
- * @copyright Philippe Hénaff philippe@dissitou.org
+ * @author Philippe aka amalgame and contributors
  * @copyright GPL-2.0
- * @Copyright (c) 2015 - Start Bootstrap
- * @copyright Apache License v2.0
  */
-
 
 /* ------------------------------------------------------------
 	1. HTML
@@ -24,7 +19,7 @@ body {
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #666;
   background-color: #fff;
-  /* UNCOMMENT FOR FULL GRAYSCALE EFFECT
+  /* UNCOMMENT FOR FULL GREYSCALE EFFECT
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1); */
 }
@@ -81,54 +76,65 @@ a:focus {
 pre {
   white-space: pre-wrap;
   /* CSS 3 */
-
   white-space: -moz-pre-wrap;
   /* Mozilla, since 1999 */
-
   white-space: -pre-wrap;
   /* Opera 4-6 */
-
   white-space: -o-pre-wrap;
   /* Opera 7 */
-
   word-wrap: break-word;
   /* Internet Explorer 5.5+ */
+}
+
+.navbar-custom .svg-inline--fa,
+.intro .svg-inline--fa {
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+  vertical-align: middle;
 }
 
 /* ------------------------------------------------------------
 	2. SIMPLE MENU
 ------------------------------------------------------------- */
 
+.navbar-toggler {
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  position: fixed;
+  right: 1rem;
+  top: .8rem;
+  color: #fff;
+}
+
 .navbar-custom {
   margin-bottom: 0;
   border-bottom: 1px solid rgba(255, 255, 255, .3);
   text-transform: uppercase;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #000;
+  background-color: transparent;
   text-shadow: 1px 1px 2px #000000;
+  min-height: 2rem;
 }
 
 .navbar-custom.top-nav-collapse {
-  background: #555 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkQ0MjBCMjQ5NjIyMTFFNEEyRjNDRjM1Q0U4NDJEMDEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkQ0MjBCMjU5NjIyMTFFNEEyRjNDRjM1Q0U4NDJEMDEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRDQyMEIyMjk2MjIxMUU0QTJGM0NGMzVDRTg0MkQwMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRDQyMEIyMzk2MjIxMUU0QTJGM0NGMzVDRTg0MkQwMSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiaCVFIAAAAcSURBVHjaYvz//z8DDDCBCEZGRrAII7IMQIABAKIpBwFHizsqAAAAAElFTkSuQmCC");
+  background: #555 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkQ0MjBCMjQ5NjIyMTFFNEEyRjNDRjM1Q0U4NDJEMDEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkQ0MjBCMjU5NjIyMTFFNEEyRjNDRjM1Q0U4NDJEMDEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRDQyMEIyMjk2MjIxMUU0QTJGM0NGMzVDRTg0MkQwMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRDQyMEIyMzk2MjIxMUU0QTJGM0NGMzVDRTg0MkQwMSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiaCVFIAAAAcSURBVHjaYvz//z8DDDCBCEZGRrAII7IMQIABAKIpBwFHizsqAAAAAElFTkSuQmCC") !important;
+}
+
+.navbar-custom.top-nav-collapse a {
+  color: #fff !important
 }
 
 .navbar-custom .navbar-brand {
   font-weight: 700;
 }
 
-.navbar-custom .navbar-brand:focus {
-  outline: 0;
-}
-
 .navbar-custom .navbar-brand .navbar-toggle {
   padding: 4px 6px;
   font-size: 1em;
   color: #fff;
-}
-
-.navbar-custom .navbar-brand .navbar-toggle:focus,
-.navbar-custom .navbar-brand .navbar-toggle:active {
-  outline: 0;
 }
 
 .navbar-custom a {
@@ -142,19 +148,13 @@ pre {
 }
 
 .navbar-custom .nav li a:hover {
-  outline: 0;
   color: rgba(255, 255, 255, .8);
   background-color: transparent;
 }
 
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li a:active {
-  outline: 0;
   background-color: transparent;
-}
-
-.navbar-custom .nav li.active {
-  outline: 0;
 }
 
 .navbar-custom .nav li.active a {
@@ -220,20 +220,16 @@ pre {
 ------------------------------------------------------------- */
 
 .intro {
-  display: table;
-  width: 100%;
-  height: 450px;
-  padding: 100px 0;
-  text-align: center;
-  color: #fff;
-  text-shadow: 2px 2px 4px #000000;
-  background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
-  background-color: #000;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-shadow: 1px 1px 2px #000000;
+  background: #555 url(../img/intro-bg.jpg);
   background-size: cover;
-  -o-background-size: cover;
-  border-bottom: 1px solid #555
+  background-position: center;
+  max-height: 450px;
+}
+
+.intro a {
+  text-decoration: none
 }
 
 .intro h3 {
@@ -265,25 +261,32 @@ pre {
   color: #fff
 }
 
-.intro .intro-body {
-  display: table-cell;
-  vertical-align: middle;
-}
-
 .intro .intro-footer {
-  margin-top: 2em
+  margin-top: 5em
 }
 
-.intro .intro-body .brand-heading {
-  font-size: 3em;
+.intro .brand-heading {
+  font-size: 2em;
 }
 
-.intro .intro-body .intro-text {
+.intro .intro-text {
   font-size: 1.5em;
+  margin-top: 3em;
 }
 
-.intro .btn-circle {
-  display: none
+@media(min-width:768px) {
+  .intro {
+    height: 100%;
+    padding: 0;
+  }
+
+  .intro .intro-body .brand-heading {
+    font-size: 3em;
+  }
+
+  .intro .intro-body .intro-text {
+    font-size: 1.5em;
+  }
 }
 
 /* ------------------------------------------------------------
@@ -386,7 +389,8 @@ pre {
   width: 100%;
   height: auto;
   border: 1px solid #ddd;
-  background: #eee
+  background: #eee;
+  display: flex
 }
 
 .dc-post .post-infos {
@@ -646,7 +650,6 @@ img.smiley {
 .btn-default:hover,
 .btn-default:focus {
   border: 1px solid #ccc;
-  outline: 0;
   color: #000;
   background-color: #ccc;
 }
@@ -674,14 +677,12 @@ img.smiley {
 
 .btn-circle:hover,
 .btn-circle:focus {
-  outline: 0;
   color: #fff;
   background: rgba(255, 255, 255, .1);
 }
 
 .btn-circle.up:hover,
 .btn-circle.up:focus {
-  outline: 0;
   color: #555;
   background: rgba(255, 255, 255, .1);
 }
@@ -865,18 +866,6 @@ img.smiley {
 /* ------------------------------------------------------------
 	8. FOOTER
 ------------------------------------------------------------- */
-
-ul.banner-social-buttons {
-  margin: 5em 0 1em 0;
-}
-
-@media(max-width:767px) {
-  ul.banner-social-buttons li {
-    display: block;
-    margin: 2em 0;
-    padding: 0;
-  }
-}
 
 footer {
   padding: 3em

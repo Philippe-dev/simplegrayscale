@@ -5,9 +5,7 @@
  * @package Dotclear
  * @subpackage Themes
  *
- * @author Start Bootstrap and Philippe aka amalgame
- *
- * @copyright Philippe Hénaff philippe@dissitou.org
+ * @author Philippe aka amalgame and contributors
  * @copyright GPL-2.0
  */
 
@@ -19,7 +17,7 @@ $this->registerModule(
     "Simple Grayscale",                           		// Name
     "Simple Grayscale Bootstrap theme for Dotclear",  	// Description
     "Start Bootstrap and Philippe aka amalgame",        // Author
-    '1.6.2',                                     		// Version
+    '2.1',                                     		// Version
     [                                          			// Properties
         'requires'          => [['core', '2.16']], 		// Dependencies
         'standalone_config' => true,

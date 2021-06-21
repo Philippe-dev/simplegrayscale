@@ -1,0 +1,32 @@
+msgid "Category"
+msgstr "Catégorie"
+
+msgid "Categories"
+msgstr "Catégories"
+
+msgid "Theme configuration upgraded."
+msgstr "La configuration du thème a été mise à jour."
+
+msgid "Behavior"
+msgstr "Comportement"
+
+msgid "Main background image"
+msgstr "Image de fond"
+
+msgid "default image"
+msgstr "image par défaut"
+
+msgid "random image"
+msgstr "image aléatoire"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Image dimensions should be at least 1200*450px. Only the <em>original</em> size can be selected."
+msgstr "Les dimensions de l'image doivent être au moins de 1200*450px. Seule la taille <em>originale</em> peut être sélectionnée."
+
+msgid "Default image"
+msgstr "Image par défaut"
+
+msgid "Random images"
+msgstr "Images aléatoires"

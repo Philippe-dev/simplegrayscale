@@ -4,14 +4,14 @@
 <head>
 
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots}}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="{{tpl:BlogEditor encode_html="1"}}" />
+	<meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}" />
 
 	<title>{{tpl:EntryTitle encode_html="1"}} - {{tpl:BlogName encode_html="1"}}</title>
-	<meta name="description" lang="{{tpl:EntryLang}}"
-		content="{{tpl:EntryContent full="1" encode_html="1" remove_html="1" cut_string="180"}}" />
+	<meta name="description" lang="{{tpl:EntryLang}}" content="{{tpl:EntryContent full=" 1" encode_html="1"
+		remove_html="1" cut_string="180" }}" />
 
 	{{tpl:include src="_head.html"}}
 	<tpl:EntryIf comments_active="1">
@@ -20,50 +20,37 @@
     	</script>
 		<script src="{{tpl:BlogQmarkURL}}pf=post.js"></script>
 	</tpl:EntryIf>
-
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="dc-post">
+<body id="page-top" class="dc-post">
 
 	{{tpl:include src="_top.html"}}
 
 	<!-- Intro Header -->
 	<header class="intro">
-		<div class="intro-body">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-md-8 col-md-offset-2">
-						<h1 class="brand-heading"><i class="fa fa-comments-o"></i> {{tpl:EntryTitle encode_html="1"}}
-						</h1>
-						<div class="intro-text">
-							<h2><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open-o"></i>
-									{{tpl:EntryCategory encode_html="1"}}</a></h2>
-						</div>
-					</div>
-					<div class="intro-footer col-md-8 col-md-offset-2">
-						<tpl:EntryIf operator="or" comments_active="1" pings_active="1">
-							<ul class="rss">
-								<li><a href="{{tpl:BlogFeedURL type="atom"}}/comments/{{tpl:EntryID}}"
-										title="{{tpl:lang This post's comments Atom feed}}"><i class="fa fa-rss"></i>
-										{{tpl:lang This post's comments feed}}</a></li>
-							</ul>
-						</tpl:EntryIf>
-						<a href="#content" class="btn btn-circle page-scroll">
-							<i class="fa fa-angle-double-down animated"></i>
-						</a>
-					</div>
-
+		<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+			<div class="d-flex justify-content-center">
+				<div class="text-center">
+					<h1><i class="fa fa-comments"></i> {{tpl:EntryTitle encode_html="1"}}</h1>
+					<p class="text-white">{{tpl:BlogDescription encode_html="1" remove_html="1"}}</p>
+					
+					<tpl:EntryIf operator="or" comments_active="1" pings_active="1">
+						<ul class="rss intro-footer">
+							<li><a href="{{tpl:BlogFeedURL type=" atom"}}/comments/{{tpl:EntryID}}"
+									title="{{tpl:lang This post's comments Atom feed}}"><i class="fa fa-rss"></i>
+									{{tpl:lang This post's comments feed}}</a></li>
+						</ul>
+					</tpl:EntryIf>
 				</div>
 			</div>
 		</div>
 	</header>
 
 	<!-- Content Section -->
-	<section id="content" class="container content-section text-center" role="main">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2">
-
+	<section id="content" class="container px-4 px-lg-5 content-section text-center" role="main">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-lg-10">
+				<h2 class="sr-only sr-only-focusable">{{tpl:lang Post}}</h2>
 				<article id="p{{tpl:EntryID}}" class="post {{tpl:EntryIfOdd}} {{tpl:EntryIfFirst}}"
 					lang="{{tpl:EntryLang}}">
 
@@ -82,18 +69,18 @@
 					<!-- # --BEHAVIOR-- publicEntryAfterContent -->
 					{{tpl:SysBehavior behavior="publicEntryAfterContent"}}
 
-					<div class="post-infos col-12">
+					<div class="post-infos row align-items-start">
 
-						<div class="col-lg-4 col-lg-offset-0">
+						<div class="col">
 							<p><i class="fa fa-user"></i> {{tpl:EntryAuthorLink}}</p>
 							<p><i class="fa fa-calendar"></i> {{tpl:EntryDate format="%d-%m-%Y"}}</p>
 							<tpl:EntryIf has_category="1">
-								<p><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open-o"></i>
+								<p><a href="{{tpl:EntryCategoryURL}}"><i class="fa fa-folder-open"></i>
 										{{tpl:EntryCategory encode_html="1"}}</a></p>
 							</tpl:EntryIf>
 						</div>
 
-						<div class="col-lg-4 col-lg-offset-0">
+						<div class="col">
 							<tpl:EntryTags>
 								<tpl:TagsHeader>
 									<p>
@@ -106,12 +93,12 @@
 
 						</div>
 
-						<div class="col-lg-4 col-lg-offset-0">
+						<div class="col">
 							<!-- # Number of comments, trackbacks and attachments -->
 
 							<tpl:EntryIf show_comments="1">
 								<p><a href="{{tpl:EntryURL}}#post-comments" class="comment_count"><i
-											class="fa fa-comment-o"></i> {{tpl:EntryCommentCount}}</a></p>
+											class="fa fa-comment"></i> {{tpl:EntryCommentCount}}</a></p>
 							</tpl:EntryIf>
 							<tpl:EntryIf show_pings="1">
 								<p><a href="{{tpl:EntryURL}}#pings" class="ping_count"><i class="fa fa-comment"></i>
@@ -191,7 +178,7 @@
 
 				<tpl:SysIfCommentPending>
 					<p class="message" id="pr">{{tpl:lang Your comment has been submitted and
-						  will be reviewed for publication.}}</p>
+						will be reviewed for publication.}}</p>
 				</tpl:SysIfCommentPending>
 
 				<!-- # Comment form -->
@@ -213,17 +200,17 @@
 
 						<p class="field"><label for="c_name">{{tpl:lang Name or nickname}}&nbsp;:</label>
 							<input name="c_name" id="c_name" type="text" size="30" maxlength="255"
-								value="{{tpl:CommentPreviewName encode_html="1"}}" />
+								value="{{tpl:CommentPreviewName encode_html=" 1"}}" />
 						</p>
 
 						<p class="field"><label for="c_mail">{{tpl:lang Email address}}&nbsp;:</label>
 							<input name="c_mail" id="c_mail" type="text" size="30" maxlength="255"
-								value="{{tpl:CommentPreviewEmail encode_html="1"}}" />
+								value="{{tpl:CommentPreviewEmail encode_html=" 1"}}" />
 						</p>
 
 						<p class="field"><label for="c_site">{{tpl:lang Website}} ({{tpl:lang optional}})&nbsp;:</label>
 							<input name="c_site" id="c_site" type="text" size="30" maxlength="255"
-								value="{{tpl:CommentPreviewSite encode_html="1"}}" />
+								value="{{tpl:CommentPreviewSite encode_html=" 1"}}" />
 						</p>
 
 						<p style="display:none"><input name="f_mail" type="text" size="30" maxlength="255" value="" />
@@ -266,8 +253,8 @@
 							<!-- # --BEHAVIOR-- publicPingBeforeContent -->
 							{{tpl:SysBehavior behavior="publicPingBeforeContent"}}
 
-							<p><a href="{{tpl:PingAuthorURL}}"
-									{{tpl:PingNoFollow}}>{{tpl:PingTitle encode_html="1"}}</a></p>
+							<p><a href="{{tpl:PingAuthorURL}}" {{tpl:PingNoFollow}}>{{tpl:PingTitle
+									encode_html="1"}}</a></p>
 							{{tpl:PingContent}}
 
 							<!-- # --BEHAVIOR-- publicPingAfterContent -->

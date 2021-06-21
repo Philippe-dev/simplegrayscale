@@ -1,24 +1,23 @@
 <!-- Navigation -->
-<nav class="navbar navbar-custom navbar-fixed-top">
-	<div class="container">
-		
+<nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom" id="mainNav">
+	<div class="container px-4 px-lg-5">
 		<ul id="prelude">
 			<li><a href="#content">{{tpl:lang To content}}</a></li>
 			<li><a href="#menubar">{{tpl:lang To menu}}</a></li>
 			<li><a href="#search">{{tpl:lang To search}}</a></li>
 		</ul>
-		
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-				<i class="fa fa-bars"></i>
+			<a class="navbar-brand" href="{{tpl:BlogURL}}"><i class="fa fa-leaf"></i> {{tpl:BlogName
+				encode_html="1"}}</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation"><i class="fas fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="{{tpl:BlogURL}}"><i class="fa fa-leaf"></i> {{tpl:BlogName encode_html="1"}}</a>
 		</div>
-		
-		<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-		{{tpl:SimpleMenu class="nav navbar-nav" description="title"}}
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			{{tpl:SimpleGrayscaleSimpleMenu class="navbar-nav ms-auto" description="title"}}
 		</div>
-		
+
 	</div>
 </nav>
 

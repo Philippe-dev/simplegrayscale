@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots robots="NOINDEX,NOARCHIVE"}}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="author" content="{{tpl:BlogEditor encode_html="1"}}" />
@@ -18,44 +18,39 @@
 	{{tpl:include src="_head.html"}}
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="dc-404">
+<body id="page-top" class="dc-404">
 
 	{{tpl:include src="_top.html"}}
 	
     <!-- Intro Header -->
-        <header class="intro">		
-		<div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading"><i class="fa fa-exclamation-circle"></i> {{tpl:lang Document not found}}</h1>
-                        <div class="intro-text"><p>{{tpl:lang The document you are looking for does not exist.}}</p>
-                    </div>
-					<div class="intro-footer col-md-8 col-md-offset-2">
-						
-						<ul class="rss">
-						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom" title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Entries feed}}</a></li>
+	<header class="intro">
+		<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+			<div class="d-flex justify-content-center">
+				<div class="text-center">
+					<h1 class="mx-auto my-0 text-uppercase"><i class="fa fa-exclamation-circle"></i> {{tpl:lang Document not found}}</h1>
+					</h1>
+					<p class="text-white">{{tpl:lang The document you are looking for does not exist.}}</p>
+					<ul class="rss intro-footer">
+						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom"
+								title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang
+								Entries feed}}</a></li>
 
 						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
-						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments" title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
+							<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments"
+									title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i
+										class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
 						</tpl:SysIf>
-						</ul>
-						                        
-						
-						<a href="#content" class="btn btn-circle page-scroll">
-                            <i class="fa fa-angle-double-down animated"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-    </header>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
 
     <!-- Content Section -->
-    <section id="content" class="container content-section text-center" role="main">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+    <section id="content" class="container px-4 px-lg-5 content-section text-center" role="main">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-lg-10">
+				<h2 class="sr-only sr-only-focusable">{{tpl:lang Error page}}</h2>
 				<div class="post">
 					<h2 class="post-title">{{tpl:lang Suggestions:}}</h2>
 					<div class="post-content">
@@ -66,7 +61,8 @@
 						</ul>
 					</div>
 				</div>
-				<p><a href="#page-top" class="btn btn-circle page-scroll up"><i class="fa fa-angle-double-up animated"></i></a></p>
+				<p><a href="#page-top" class="btn btn-circle page-scroll up"><i
+					class="fa fa-angle-double-up animated"></i></a></p>
             </div>
         </div>
     </section>
