@@ -16,7 +16,7 @@ if (!defined('DC_RC_PATH')) {
 $this->registerModule(
     "Simple Grayscale",                           		// Name
     "Simple Grayscale Bootstrap theme for Dotclear",  	// Description
-    "Start Bootstrap and Philippe aka amalgame",        // Author
+    "Philippe aka amalgame and contributors",        // Author
     '2.1',                                     		// Version
     [                                          			// Properties
         'requires'          => [['core', '2.16']], 		// Dependencies
