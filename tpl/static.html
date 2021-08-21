@@ -40,17 +40,6 @@
 					</h1>
 					<p class="text-white">{{tpl:BlogDescription encode_html="1" remove_html="1"}}</p>
 					
-					<ul class="rss intro-footer">
-						<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom"
-								title="{{tpl:lang Entries feed}}" class="feed"><i class="fa fa-rss"></i> {{tpl:lang
-								Entries feed}}</a></li>
-
-						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
-							<li><a type="application/atom+xml" href="{{tpl:BlogURL}}feed/atom/comments"
-									title="{{tpl:lang This blog's comments Atom feed}}" class="feed"><i
-										class="fa fa-rss"></i> {{tpl:lang Comments feed}}</a></li>
-						</tpl:SysIf>
-					</ul>
 				</div>
 			</div>
 		</div>

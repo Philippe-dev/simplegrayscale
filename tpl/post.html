@@ -34,13 +34,6 @@
 					<h1><i class="fa fa-comments"></i> {{tpl:EntryTitle encode_html="1"}}</h1>
 					<p class="text-white">{{tpl:BlogDescription encode_html="1" remove_html="1"}}</p>
 					
-					<tpl:EntryIf operator="or" comments_active="1" pings_active="1">
-						<ul class="rss intro-footer">
-							<li><a href="{{tpl:BlogFeedURL type=" atom"}}/comments/{{tpl:EntryID}}"
-									title="{{tpl:lang This post's comments Atom feed}}"><i class="fa fa-rss"></i>
-									{{tpl:lang This post's comments feed}}</a></li>
-						</ul>
-					</tpl:EntryIf>
 				</div>
 			</div>
 		</div>
@@ -182,7 +175,7 @@
 				</tpl:SysIfCommentPending>
 
 				<!-- # Comment form -->
-				<form action="{{tpl:EntryURL}}#pr" method="post" id="comment-form" role="form">
+				<form action="{{tpl:EntryURL}}#pr" method="post" id="comment-form">
 					<tpl:IfCommentPreview>
 						<div id="pr">
 							<h3>{{tpl:lang Your comment}}</h3>

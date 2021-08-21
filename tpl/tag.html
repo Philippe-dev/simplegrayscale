@@ -47,12 +47,6 @@
 					<h1 class="mx-auto my-0 text-uppercase"><i class="fa fa-tags"></i> {{tpl:lang Tag}} : {{tpl:TagID}}</h1>
 					<p class="text-white"><a href="{{tpl:BlogURL}}tags">{{tpl:lang All tags}}</a></p>
 					
-					<ul class="rss intro-footer">
-						<li><a type="application/atom+xml" href="{{tpl:TagFeedURL type="atom"}}" title="{{tpl:lang This tag's entries Atom feed}}" class="feed">{{tpl:lang Entries feed}}</a></li>
-						<tpl:SysIf operator="or" comments_active="1" pings_active="1">
-						<li><a type="application/atom+xml" href="{{tpl:TagFeedURL type="atom"}}/comments" title="{{tpl:lang This tag's comments Atom feed}}" class="feed">{{tpl:lang Comments feed}}</a></li>
-						</tpl:SysIf>
-					</ul>
 				</div>
 			</div>
 		</div>

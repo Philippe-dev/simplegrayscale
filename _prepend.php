@@ -5,10 +5,9 @@
  * @package Dotclear
  * @subpackage Themes
  *
- * @author Philippe aka amalgame and contributors
- * @copyright GPL-2.0
+ * @copyright Philippe aka amalgame
+ * @copyright GPL-2.0-only
  */
-
 namespace themes\simplegrayscale;
 
 if (!defined('DC_RC_PATH')) {
@@ -24,6 +23,7 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 # Behaviors
 $GLOBALS['core']->addBehavior('adminPageHTMLHead', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin', 'adminPageHTMLHead']);
 $GLOBALS['core']->addBehavior('adminPopupMedia', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin', 'adminPopupMedia']);
+$GLOBALS['core']->addBehavior('adminPageHTTPHeaderCSP', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin','adminPageHTTPHeaderCSP']);
 
 class tplSimpleGrayscaleThemeAdmin
 {
@@ -41,7 +41,15 @@ class tplSimpleGrayscaleThemeAdmin
         }
 
         echo '<script src="' . $theme_url . '/js/admin.js' . '"></script>'."\n".
+        '<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>'."\n".
        '<link rel="stylesheet" media="screen" href="' . $theme_url . '/css/admin.css'. '" />'."\n";
+
+       $core->auth->user_prefs->addWorkspace('accessibility');
+        if (!$core->auth->user_prefs->accessibility->nodragdrop) {
+            echo
+            \dcPage::jsLoad('js/jquery/jquery-ui.custom.js') .
+            \dcPage::jsLoad('js/jquery/jquery.ui.touch-punch.js');
+        }
     }
 
     public static function adminPopupMedia($editor = '')
@@ -58,5 +66,19 @@ class tplSimpleGrayscaleThemeAdmin
         }
 
         return '<script src="' . $theme_url . '/js/popup_media.js' . '"></script>';
+    }
+
+    public static function adminPageHTTPHeaderCSP($csp)
+    {
+        global $core;
+        if ($core->blog->settings->system->theme != 'simplegrayscale') {
+            return;
+        }
+        
+        if (isset($csp['script-src'])) {
+            $csp['script-src'] .= ' use.fontawesome.com';
+        } else {
+            $csp['script-src'] = 'use.fontawesome.com';
+        }
     }
 }

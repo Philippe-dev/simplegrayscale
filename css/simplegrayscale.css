@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * @brief Grayscale, a theme for Dotclear 2
+ * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
@@ -225,7 +225,7 @@ pre {
   background: #555 url(../img/intro-bg.jpg);
   background-size: cover;
   background-position: center;
-  max-height: 450px;
+  max-height: 450px
 }
 
 .intro a {
@@ -866,6 +866,31 @@ img.smiley {
 /* ------------------------------------------------------------
 	8. FOOTER
 ------------------------------------------------------------- */
+ul.banner-social-buttons {
+  margin: 5em 2em 1em;
+  font-size: 1.25em;
+}
+
+ul.banner-social-buttons li {
+  display: inline;
+}
+
+ul.banner-social-buttons li a {
+  padding: 1em;
+  margin: .2em
+}
+
+ul.banner-social-buttons li .svg-inline--fa {
+  margin-right: .5em;
+}
+
+@media(max-width:767px) {
+  ul.banner-social-buttons li {
+    display: block;
+    margin: 2em 0;
+    padding: 0;
+  }
+}
 
 footer {
   padding: 3em

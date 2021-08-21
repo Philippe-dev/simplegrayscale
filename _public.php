@@ -14,18 +14,22 @@ if (!defined('DC_RC_PATH')) {
 
 l10n::set(dirname(__FILE__) . '/locales/' . $_lang . '/main');
 
-# Grayscale random image CSS and js files
+# Simple Grayscale random image CSS and js files
 $core->addBehavior('publicHeadContent', ['simpleGrayscalePublic','publicHeadContent']);
 $core->addBehavior('publicFooterContent', ['simpleGrayscalePublic','publicFooterContent']);
 
+# stickers
+$core->tpl->addValue('simpleGrayscaleSocialLinks', ['simpleGrayscalePublic', 'simpleGrayscaleSocialLinks']);
+
 # Simple menu template functions
-$core->tpl->addValue('SimpleGrayscaleSimpleMenu', ['tplSimpleGrayscaleSimpleMenu', 'SimpleGrayscaleSimpleMenu']);
+$core->tpl->addValue('simpleGrayscaleSimpleMenu', ['tplSimpleGrayscaleSimpleMenu', 'simpleGrayscaleSimpleMenu']);
 
 class simpleGrayscalePublic
 {
     public static function publicHeadContent($core)
     {
         $core = $GLOBALS['core'];
+        $_ctx = $GLOBALS['_ctx'];
 
         # Settings
         if (preg_match('#^http(s)?://#', $core->blog->settings->system->themes_url)) {
@@ -45,6 +49,10 @@ class simpleGrayscalePublic
             $sb['default-image'] = 1;
         }
 
+        if (!isset($sb['use-featuredMedia'])) {
+            $sb['use-featuredMedia'] = 0;
+        }
+
         $si = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_images');
         $si = @unserialize($si);
 
@@ -60,26 +68,43 @@ class simpleGrayscalePublic
             $si['default-image-tb-url'] = $theme_url . '/img/.intro-bg_s.jpg';
         }
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             if (!isset($si['random-image-' . $i . '-url'])) {
-                $si['random-image-' . $i . '-url'] = $theme_url . '/img/intro-bg-' . $i . '.jpg';
+                $si['random-image-' . $i . '-url'] = $theme_url . '/img/bg-intro-' . $i . '.jpg';
             }
             if (!isset($si['random-image-' . $i . '-tb-url'])) {
-                $si['random-image-' . $i . '-tb-url'] = $theme_url . '/img/.intro-bg-' . $i . '_s.jpg';
+                $si['random-image-' . $i . '-tb-url'] = $theme_url . '/img/.bg-intro-' . $i . '_s.jpg';
+            }
+        }
+
+        # check if post has featured media
+        if ($_ctx->posts !== null && $core->plugins->moduleExists('featuredMedia')) {
+            $_ctx->featured = new ArrayObject($core->media->getPostMedia($_ctx->posts->post_id, null, "featured"));
+            foreach ($_ctx->featured as $featured_i => $featured_f) {
+                $GLOBALS['featured_i'] = $featured_i;
+                $GLOBALS['featured_f'] = $featured_f;
+            }
+            if (isset($featured_f->file_url)) {
+                $featuredImageUrl = $featured_f->file_url;
             }
         }
 
         $rs = '<style>';
-        $rs .= '.intro { background-image: url("' . $si['default-image-url'] . '"); }';
-        if ($sb['default-image'] != 1) {
-            for ($i = 0; $i < 3; $i++) {
-                $rs .= '.intro.round' . $i . ' {' .
+        if ($sb['use-featuredMedia'] && !empty($featuredImageUrl)) {
+            $rs .= '.intro { background-image: url("' . $featuredImageUrl . '"); }';
+        } else {
+            if ($sb['default-image']) {
+                $rs .= '.intro { background-image: url("' . $si['default-image-url'] . '"); }';
+            } else {
+                for ($i = 0; $i < 6; $i++) {
+                    $rs .= '.intro.round' . $i . ' {' .
                     'background: #555 url(' . $si['random-image-' . $i . '-url'] . ');' .
                     'background-size: cover;' .
                     'background-position: center;' .
                 '}';
+                }
+                $rs .= '.intro { background-image: none; }';
             }
-            $rs .= '.intro { background-image: none; }';
         }
         $rs .= '</style>';
         echo $rs;
@@ -106,17 +131,59 @@ class simpleGrayscalePublic
         echo
         '<script>' . "\n" .
             "$(document).ready(function() {
-            var round = parseInt(Math.random()*3);
+            var round = parseInt(Math.random()*6);
                 $('header.intro').addClass('round'+round);
             });" .
         "</script>\n";
+    }
+
+    public static function simpleGrayscaleSocialLinks($attr)
+    {
+        global $core;
+        # Social media links
+        $res     = '';
+
+        $s = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_stickers');
+        $s = @unserialize($s);
+            
+        $s = array_filter($s, 'self::cleanSocialLinks');
+                
+        $count = 0;
+        foreach ($s as $sticker) {
+            $res .= self::setSocialLink($count, ($count == count($s)), $sticker['label'], $sticker['url'], $sticker['image']);
+            $count++;
+        }
+
+        if ($res != '') {
+            return $res;
+        }
+    }
+    protected static function setSocialLink($position, $last, $label, $url, $image)
+    {
+        return '<li id="slink' . $position . '"' . ($last ? ' class="last"' : '') . '>' . "\n" .
+            '<a class="btn btn-default btn-lg" title="' . $label . '" href="' . $url . '">' .
+            ' <i class="' . $image . '"></i>' . $label .
+            '</a>' . "\n" .
+            '</li>' . "\n";
+    }
+
+    protected static function cleanSocialLinks($s)
+    {
+        if (is_array($s)) {
+            if (isset($s['label']) && isset($s['url']) && isset($s['image'])) {
+                if ($s['label'] != null && $s['url'] != null && $s['image'] != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 
 class tplSimpleGrayscaleSimpleMenu
 {
     # Template function
-    public static function SimpleGrayscaleSimpleMenu($attr)
+    public static function simpleGrayscaleSimpleMenu($attr)
     {
         global $core;
 
