@@ -220,7 +220,7 @@ echo '<h3>' . __('Images choice') . '</h3>';
 
 echo '<h4 class="pretty-title">' . __('Default image') . '</h4>';
 
-echo '<div class="box theme simplegrayscaleimg">';
+echo '<div class="box theme">';
 
 echo '<p> ' .
 '<img id="default-image-thumb-src" alt="' . __('Thumbnail') . '" src="' . $si['default-image-tb-url'] . '" width="240" height="90" />' .
@@ -239,7 +239,7 @@ echo '</div>';
 echo '<h4 class="pretty-title">' . __('Random images') . '</h4>';
 
 for ($i = 0; $i < 6; $i++) {
-    echo '<div class="box theme simplegrayscaleimg">';
+    echo '<div class="box theme">';
 
     echo '<p> ' .
     '<img id="random-image-' . $i . '-thumb-src" alt="' . __('Thumbnail') . '" src="' . $si['random-image-' . $i . '-tb-url'] . '" width="240" height="90" />' .
