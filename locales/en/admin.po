@@ -1,0 +1,38 @@
+msgid "Theme configuration upgraded."
+msgstr ""
+
+msgid "Presentation"
+msgstr ""
+
+msgid "Background image"
+msgstr ""
+
+msgid "Main background image"
+msgstr ""
+
+msgid "default image"
+msgstr ""
+
+msgid "Use featured media for posts"
+msgstr ""
+
+msgid "random image"
+msgstr ""
+
+msgid "Images choice"
+msgstr ""
+
+msgid "Default image"
+msgstr ""
+
+msgid "Random images"
+msgstr ""
+
+msgid "Stickers"
+msgstr ""
+
+msgid "Social links"
+msgstr ""
+
+msgid "Social links (header)"
+msgstr ""
