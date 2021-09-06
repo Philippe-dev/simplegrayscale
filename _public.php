@@ -9,8 +9,6 @@
  * @copyright GPL-2.0
  */
 
-namespace themes\simplegrayscale;
-
 if (!defined('DC_RC_PATH')) {
     return;
 }
