@@ -34,5 +34,5 @@ msgstr ""
 msgid "Social links"
 msgstr ""
 
-msgid "Social links (header)"
+msgid "Social links (footer)"
 msgstr ""

@@ -34,5 +34,5 @@ msgstr "Étiquettes"
 msgid "Social links"
 msgstr "Liens vers les médias sociaux"
 
-msgid "Social links (header)"
-msgstr "Lien vers les médias sociaux (en-tête)"
+msgid "Social links (footer)"
+msgstr "Lien vers les médias sociaux (pied de page)"

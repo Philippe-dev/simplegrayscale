@@ -268,11 +268,11 @@ echo '<form id="theme_config" action="' . $core->adminurl->get('admin.blog.theme
 
 echo '<div class="fieldset">';
 
-echo '<h4 class="pretty-title">' . __('Social links') . '</h4>';
+echo '<h4 class="pretty-title">' . __('Social links (footer)') . '</h4>';
 
 echo
 '<div class="table-outer">' .
-'<table class="dragable">' . '<caption class="sr-only">' . __('Social links (header)') . '</caption>' .
+'<table class="dragable">' . '<caption class="sr-only">' . __('Social links (footer)') . '</caption>' .
 '<thead>' .
 '<tr>' .
 '<th scope="col">' . '</th>' .
