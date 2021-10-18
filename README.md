@@ -2,7 +2,7 @@
 
 ![Screenshot](screenshot.jpg)
 
-A theme based on Start Bootstrap Grayscale template (see below)
+A Dotclear theme based on Start Bootstrap Grayscale template (see below)
 
 # [Start Bootstrap](http://startbootstrap.com/) - [Grayscale](http://startbootstrap.com/template-overviews/grayscale/)
 
