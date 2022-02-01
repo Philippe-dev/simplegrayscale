@@ -18,9 +18,9 @@ $(function () {
             main.$('#default-image-url').prop('value', href).trigger('change');
         } else {
             for (let i = 0; i < 6; i++) {
-                if (buttonId == 'random-image-' + i + '-selector') {
-                    main.$('#random-image-' + i + '-tb-url').prop('value', thumburl);
-                    main.$('#random-image-' + i + '-url').prop('value', href).trigger('change');
+                if (buttonId == `random-image-${i}-selector`) {
+                    main.$(`#random-image-${i}-tb-url`).prop('value', thumburl);
+                    main.$(`#random-image-${i}-url`).prop('value', href).trigger('change');
                 }
             }
         }

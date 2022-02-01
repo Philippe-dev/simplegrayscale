@@ -45,7 +45,7 @@ class tplSimpleGrayscaleThemeAdmin
         '<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>'."\n".
        '<link rel="stylesheet" media="screen" href="' . $theme_url . '/css/admin.css'. '" />'."\n";
 
-       $core->auth->user_prefs->addWorkspace('accessibility');
+        $core->auth->user_prefs->addWorkspace('accessibility');
         if (!$core->auth->user_prefs->accessibility->nodragdrop) {
             echo
             \dcPage::jsLoad('js/jquery/jquery-ui.custom.js') .
