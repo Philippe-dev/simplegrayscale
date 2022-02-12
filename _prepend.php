@@ -8,7 +8,6 @@
  * @copyright Philippe aka amalgame
  * @copyright GPL-2.0-only
  */
-
  namespace themes\simplegrayscale;
 
 if (!defined('DC_RC_PATH')) {
@@ -21,10 +20,10 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 }
 // admin part below
 
-# Behaviors
+// Behaviors
 $GLOBALS['core']->addBehavior('adminPageHTMLHead', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin', 'adminPageHTMLHead']);
 $GLOBALS['core']->addBehavior('adminPopupMedia', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin', 'adminPopupMedia']);
-$GLOBALS['core']->addBehavior('adminPageHTTPHeaderCSP', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin','adminPageHTTPHeaderCSP']);
+$GLOBALS['core']->addBehavior('adminPageHTTPHeaderCSP', [__NAMESPACE__ . '\tplSimpleGrayscaleThemeAdmin', 'adminPageHTTPHeaderCSP']);
 
 class tplSimpleGrayscaleThemeAdmin
 {
@@ -41,9 +40,9 @@ class tplSimpleGrayscaleThemeAdmin
             $theme_url = \http::concatURL($core->blog->url, $core->blog->settings->system->themes_url . '/' . $core->blog->settings->system->theme);
         }
 
-        echo '<script src="' . $theme_url . '/js/admin.js' . '"></script>'."\n".
-        '<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>'."\n".
-       '<link rel="stylesheet" media="screen" href="' . $theme_url . '/css/admin.css'. '" />'."\n";
+        echo '<script src="' . $theme_url . '/js/admin.js' . '"></script>' . "\n" .
+        '<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>' . "\n" .
+       '<link rel="stylesheet" media="screen" href="' . $theme_url . '/css/admin.css' . '" />' . "\n";
 
         $core->auth->user_prefs->addWorkspace('accessibility');
         if (!$core->auth->user_prefs->accessibility->nodragdrop) {
@@ -75,7 +74,7 @@ class tplSimpleGrayscaleThemeAdmin
         if ($core->blog->settings->system->theme != 'simplegrayscale') {
             return;
         }
-        
+
         if (isset($csp['script-src'])) {
             $csp['script-src'] .= ' use.fontawesome.com';
         } else {

@@ -14,14 +14,14 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    "Simple Grayscale",                           				// Name
-    "Simple Grayscale Bootstrap 5 theme for Dotclear",  		// Description
-    "Philippe aka amalgame and contributors",                   // Author
-    '2.1.1',                                       		        // Version
+    'Simple Grayscale',                           				// Name
+    'Simple Grayscale Bootstrap 5 theme for Dotclear',  		// Description
+    'Philippe aka amalgame and contributors',                   // Author
+    '2.1.2',                                       		        // Version
     [                                          			        // Properties
-        'requires'          => [['core', '2.19']], 		        // Dependencies
+        'requires' => [['core', '2.19']], 		                // Dependencies
         'standalone_config' => true,
-        'type'              => 'theme',
-        'tplset' 			=> 'mustek'
+        'type' => 'theme',
+        'tplset' => 'mustek'
     ]
 );

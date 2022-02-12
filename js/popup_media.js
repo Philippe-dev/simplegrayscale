@@ -13,7 +13,7 @@ $(function () {
         const thumburl = $('input[name="src"]').eq(2).val();
         const buttonId = main.$('input[name="change-button-id"]').val();
 
-        if (buttonId == 'default-image-selector') {   
+        if (buttonId == 'default-image-selector') {
             main.$('#default-image-tb-url').prop('value', thumburl);
             main.$('#default-image-url').prop('value', href).trigger('change');
         } else {

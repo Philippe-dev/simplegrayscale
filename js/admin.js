@@ -18,8 +18,7 @@ $(function () {
     $('#default-image-url').on('change', function (e) {
         const url = `${$('input[name="theme-url"]').val()}/img/intro-bg.jpg`;
         let thumb = `${$('input[name="theme-url"]').val()}/img/.intro-bg_s.jpg`;
-        if ($('#default-image-url').val() == url) {
-        } else {
+        if ($('#default-image-url').val() != url) {
             thumb = $('#default-image-tb-url').val();
         }
         $('#default-image-thumb-src').attr('src', thumb);
@@ -45,8 +44,7 @@ $(function () {
         $(`#random-image-${i}-url`).on('change', function (e) {
             const url = `${$('input[name="theme-url"]').val()}/img/bg-intro-${i}.jpg`;
             let thumb = `${$('input[name="theme-url"]').val()}/img/.bg-intro-${i}_s.jpg`;
-            if ($(`#random-image-${i}-url`).val() == url) {
-            } else {
+            if ($(`#random-image-${i}-url`).val() != url) {
                 thumb = $(`#random-image-${i}-tb-url`).val();
             }
             $(`#random-image-${i}-thumb-src`).attr('src', thumb);
