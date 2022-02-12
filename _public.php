@@ -196,7 +196,7 @@ class tplSimpleGrayscaleSimpleMenu
     {
         global $core;
 
-        if (!(boolean) $core->blog->settings->system->simpleMenu_active) {
+        if (!(bool) $core->blog->settings->system->simpleMenu_active) {
             return '';
         }
 
@@ -221,7 +221,7 @@ class tplSimpleGrayscaleSimpleMenu
 
         $ret = '';
 
-        if (!(boolean) $core->blog->settings->system->simpleMenu_active) {
+        if (!(bool) $core->blog->settings->system->simpleMenu_active) {
             return $ret;
         }
 
