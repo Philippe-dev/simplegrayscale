@@ -8,7 +8,7 @@
  * @copyright Philippe aka amalgame
  * @copyright GPL-2.0-only
  */
- namespace themes\simplegrayscale;
+namespace themes\simplegrayscale;
 
 if (!defined('DC_RC_PATH')) {
     return;
