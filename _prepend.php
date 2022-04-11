@@ -31,7 +31,7 @@ class tplSimpleGrayscaleThemeAdmin
     {
         $core = $GLOBALS['core'];
 
-        if ($core->blog->settings->system->theme != 'simplegrayscale') {
+        if ($core->blog->settings->system->theme !== basename(dirname(__FILE__))) {
             return;
         }
         if (preg_match('#^http(s)?://#', $core->blog->settings->system->themes_url)) {
@@ -71,7 +71,7 @@ class tplSimpleGrayscaleThemeAdmin
     public static function adminPageHTTPHeaderCSP($csp)
     {
         global $core;
-        if ($core->blog->settings->system->theme != 'simplegrayscale') {
+        if ($core->blog->settings->system->theme !== basename(dirname(__FILE__))) {
             return;
         }
 
