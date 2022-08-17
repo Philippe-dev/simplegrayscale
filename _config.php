@@ -14,16 +14,16 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 
 l10n::set(dirname(__FILE__) . '/locales/' . $_lang . '/admin');
 
-if (preg_match('#^http(s)?://#', $core->blog->settings->system->themes_url)) {
-    $theme_url = \http::concatURL($core->blog->settings->system->themes_url, '/' . $core->blog->settings->system->theme);
+if (preg_match('#^http(s)?://#', dcCore::app()->blog->settings->system->themes_url)) {
+    $theme_url = \http::concatURL(dcCore::app()->blog->settings->system->themes_url, '/' . dcCore::app()->blog->settings->system->theme);
 } else {
-    $theme_url = \http::concatURL($core->blog->url, $core->blog->settings->system->themes_url . '/' . $core->blog->settings->system->theme);
+    $theme_url = \http::concatURL(dcCore::app()->blog->url, dcCore::app()->blog->settings->system->themes_url . '/' . dcCore::app()->blog->settings->system->theme);
 }
 
-$standalone_config = (bool) $core->themes->moduleInfo($core->blog->settings->system->theme, 'standalone_config');
+$standalone_config = (bool) dcCore::app()->themes->moduleInfo(dcCore::app()->blog->settings->system->theme, 'standalone_config');
 
 // random or default image behavior
-$sb = $GLOBALS['core']->blog->settings->themes->get($GLOBALS['core']->blog->settings->system->theme . '_behavior');
+$sb = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_behavior');
 $sb = $sb ? (unserialize($sb) ?: []) : [];
 
 if (!is_array($sb)) {
@@ -35,7 +35,7 @@ if (!isset($sb['default-image'])) {
 }
 
 // default or user defined images settings
-$si = $GLOBALS['core']->blog->settings->themes->get($GLOBALS['core']->blog->settings->system->theme . '_images');
+$si = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_images');
 $si = $si ? (unserialize($si) ?: []) : [];
 
 if (!is_array($si)) {
@@ -64,7 +64,7 @@ if (!isset($sb['use-featuredMedia'])) {
     $sb['use-featuredMedia'] = 0;
 }
 
-$stickers = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_stickers');
+$stickers = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_stickers');
 $stickers = $stickers ? (unserialize($stickers) ?: []) : [];
 
 $stickers_full = [];
@@ -166,20 +166,20 @@ if (!empty($_POST)) {
             }
         }
 
-        $core->blog->settings->addNamespace('themes');
-        $core->blog->settings->themes->put($core->blog->settings->system->theme . '_behavior', serialize($sb));
-        $core->blog->settings->themes->put($core->blog->settings->system->theme . '_images', serialize($si));
-        $core->blog->settings->themes->put($core->blog->settings->system->theme . '_stickers', serialize($stickers));
+        dcCore::app()->blog->settings->addNamespace('themes');
+        dcCore::app()->blog->settings->themes->put(dcCore::app()->blog->settings->system->theme . '_behavior', serialize($sb));
+        dcCore::app()->blog->settings->themes->put(dcCore::app()->blog->settings->system->theme . '_images', serialize($si));
+        dcCore::app()->blog->settings->themes->put(dcCore::app()->blog->settings->system->theme . '_stickers', serialize($stickers));
 
         // Blog refresh
-        $core->blog->triggerBlog();
+        dcCore::app()->blog->triggerBlog();
 
         // Template cache reset
-        $core->emptyTemplatesCache();
+        dcCore::app()->emptyTemplatesCache();
 
         dcPage::success(__('Theme configuration upgraded.'), true, true);
     } catch (Exception $e) {
-        $core->error->add($e->getMessage());
+        dcCore::app()->error->add($e->getMessage());
     }
 }
 
@@ -190,7 +190,7 @@ if (!$standalone_config) {
 
 echo '<div class="multi-part" id="themes-list' . ($conf_tab == 'presentation' ? '' : '-presentation') . '" title="' . __('Presentation') . '">';
 
-echo '<form id="theme_config" action="' . $core->adminurl->get('admin.blog.theme', ['conf' => '1']) .
+echo '<form id="theme_config" action="' . dcCore::app()->adminurl->get('admin.blog.theme', ['conf' => '1']) .
     '" method="post" enctype="multipart/form-data">';
 
 echo '<div class="fieldset">';
@@ -204,7 +204,7 @@ __('default image') . '</label></p>' .
 form::radio(['default-image', 'default-image-2'], false, !$sb['default-image']) .
 __('random image') . '</label></p>';
 
-if ($core->plugins->moduleExists('featuredMedia')) {
+if (dcCore::app()->plugins->moduleExists('featuredMedia')) {
     echo '<p class="vertical-separator"><label class="classic" for="use-featuredMedia">' .
         form::checkbox('use-featuredMedia', '1', $sb['use-featuredMedia']) .
         __('Use featured media for posts') . '</label></p>';
@@ -253,14 +253,14 @@ for ($i = 0; $i < 6; $i++) {
 
 echo '</div>';
 echo '<p><input type="hidden" name="conf_tab" value="presentation" /></p>';
-echo '<p class="clear"><input type="submit" value="' . __('Save') . '" />' . $core->formNonce() . '</p>';
+echo '<p class="clear"><input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
 echo form::hidden(['theme-url'], $theme_url);
 echo form::hidden(['change-button-id'], '');
 echo '</form>';
 echo '</div>'; // Close tab
 
 echo '<div class="multi-part" id="themes-list' . ($conf_tab == 'links' ? '' : '-links') . '" title="' . __('Stickers') . '">';
-echo '<form id="theme_config" action="' . $core->adminurl->get('admin.blog.theme', ['conf' => '1']) .
+echo '<form id="theme_config" action="' . dcCore::app()->adminurl->get('admin.blog.theme', ['conf' => '1']) .
     '" method="post" enctype="multipart/form-data">';
 
 echo '<div class="fieldset">';
@@ -301,7 +301,7 @@ echo
     '</table></div>';
     echo '</div>';
     echo '<p><input type="hidden" name="conf_tab" value="links" /></p>';
-    echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . $core->formNonce() . '</p>';
+    echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
     echo '</form>';
 
 echo '</div>'; // Close tab

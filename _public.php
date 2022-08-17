@@ -17,30 +17,28 @@ if (!defined('DC_RC_PATH')) {
 \l10n::set(dirname(__FILE__) . '/locales/' . $_lang . '/main');
 
 // Simple Grayscale random image CSS and js files
-$core->addBehavior('publicHeadContent', [__NAMESPACE__ . '\simpleGrayscalePublic', 'publicHeadContent']);
-$core->addBehavior('publicFooterContent', [__NAMESPACE__ . '\simpleGrayscalePublic', 'publicFooterContent']);
+\dcCore::app()->addBehavior('publicHeadContent', [__NAMESPACE__ . '\simpleGrayscalePublic', 'publicHeadContent']);
+\dcCore::app()->addBehavior('publicFooterContent', [__NAMESPACE__ . '\simpleGrayscalePublic', 'publicFooterContent']);
 
 // stickers
-$core->tpl->addValue('simpleGrayscaleSocialLinks', [__NAMESPACE__ . '\simpleGrayscalePublic', 'simpleGrayscaleSocialLinks']);
+\dcCore::app()->tpl->addValue('simpleGrayscaleSocialLinks', [__NAMESPACE__ . '\simpleGrayscalePublic', 'simpleGrayscaleSocialLinks']);
 
 // Simple menu template functions
-$core->tpl->addValue('simpleGrayscaleSimpleMenu', [__NAMESPACE__ . '\tplSimpleGrayscaleSimpleMenu', 'simpleGrayscaleSimpleMenu']);
+\dcCore::app()->tpl->addValue('simpleGrayscaleSimpleMenu', [__NAMESPACE__ . '\tplSimpleGrayscaleSimpleMenu', 'simpleGrayscaleSimpleMenu']);
 
 class simpleGrayscalePublic
 {
-    public static function publicHeadContent($core)
+    public static function publicHeadContent()
     {
-        $core = $GLOBALS['core'];
-        $_ctx = $GLOBALS['_ctx'];
 
         // Settings
-        if (preg_match('#^http(s)?://#', $core->blog->settings->system->themes_url)) {
-            $theme_url = \http::concatURL($core->blog->settings->system->themes_url, '/' . $core->blog->settings->system->theme);
+        if (preg_match('#^http(s)?://#', \dcCore::app()->blog->settings->system->themes_url)) {
+            $theme_url = \http::concatURL(\dcCore::app()->blog->settings->system->themes_url, '/' . \dcCore::app()->blog->settings->system->theme);
         } else {
-            $theme_url = \http::concatURL($core->blog->url, $core->blog->settings->system->themes_url . '/' . $core->blog->settings->system->theme);
+            $theme_url = \http::concatURL(\dcCore::app()->blog->url, \dcCore::app()->blog->settings->system->themes_url . '/' . \dcCore::app()->blog->settings->system->theme);
         }
 
-        $sb = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_behavior');
+        $sb = \dcCore::app()->blog->settings->themes->get(\dcCore::app()->blog->settings->system->theme . '_behavior');
         $sb = $sb ? (unserialize($sb) ?: []) : [];
 
         if (!is_array($sb)) {
@@ -55,7 +53,7 @@ class simpleGrayscalePublic
             $sb['use-featuredMedia'] = 0;
         }
 
-        $si = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_images');
+        $si = \dcCore::app()->blog->settings->themes->get(\dcCore::app()->blog->settings->system->theme . '_images');
         $si = $si ? (unserialize($si) ?: []) : [];
 
         if (!is_array($si)) {
@@ -80,9 +78,9 @@ class simpleGrayscalePublic
         }
 
         // check if post has featured media
-        if ($_ctx->posts !== null && $core->plugins->moduleExists('featuredMedia')) {
-            $_ctx->featured = new \ArrayObject($core->media->getPostMedia($_ctx->posts->post_id, null, 'featured'));
-            foreach ($_ctx->featured as $featured_i => $featured_f) {
+        if (\dcCore::app()->ctx->posts !== null && \dcCore::app()->plugins->moduleExists('featuredMedia')) {
+            \dcCore::app()->ctx->featured = new \ArrayObject(\dcCore::app()->media->getPostMedia(\dcCore::app()->ctx->posts->post_id, null, 'featured'));
+            foreach (\dcCore::app()->ctx->featured as $featured_i => $featured_f) {
                 $GLOBALS['featured_i'] = $featured_i;
                 $GLOBALS['featured_f'] = $featured_f;
             }
@@ -112,12 +110,11 @@ class simpleGrayscalePublic
         echo $rs;
     }
 
-    public static function publicFooterContent($core)
+    public static function publicFooterContent()
     {
-        $core = $GLOBALS['core'];
 
         // Settings
-        $sb = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_behavior');
+        $sb = \dcCore::app()->blog->settings->themes->get(\dcCore::app()->blog->settings->system->theme . '_behavior');
         $sb = $sb ? (unserialize($sb) ?: []) : [];
 
         if (!is_array($sb)) {
@@ -147,11 +144,10 @@ class simpleGrayscalePublic
 
     public static function simpleGrayscaleSocialLinksHelper()
     {
-        global $core;
         // Social media links
         $res = '';
 
-        $s = $core->blog->settings->themes->get($core->blog->settings->system->theme . '_stickers');
+        $s = \dcCore::app()->blog->settings->themes->get(\dcCore::app()->blog->settings->system->theme . '_stickers');
         $s = $s ? (unserialize($s) ?: []) : [];
 
         $s = array_filter($s, 'self::cleanSocialLinks');
@@ -194,9 +190,8 @@ class tplSimpleGrayscaleSimpleMenu
     // Template function
     public static function simpleGrayscaleSimpleMenu($attr)
     {
-        global $core;
 
-        if (!(bool) $core->blog->settings->system->simpleMenu_active) {
+        if (!(bool) \dcCore::app()->blog->settings->system->simpleMenu_active) {
             return '';
         }
 
@@ -217,22 +212,21 @@ class tplSimpleGrayscaleSimpleMenu
 
     public static function displayMenu($class = '', $id = '', $description = '')
     {
-        global $core;
 
         $ret = '';
 
-        if (!(bool) $core->blog->settings->system->simpleMenu_active) {
+        if (!(bool) \dcCore::app()->blog->settings->system->simpleMenu_active) {
             return $ret;
         }
 
-        $menu = $core->blog->settings->system->simpleMenu;
+        $menu = \dcCore::app()->blog->settings->system->simpleMenu;
         if (is_array($menu)) {
             // Current relative URL
             $url = $_SERVER['REQUEST_URI'];
             $abs_url = \http::getHost() . $url;
 
             // Home recognition var
-            $home_url = \html::stripHostURL($core->blog->url);
+            $home_url = \html::stripHostURL(\dcCore::app()->blog->url);
             $home_directory = dirname($home_url);
             if ($home_directory != '/') {
                 $home_directory = $home_directory . '/';
@@ -290,7 +284,7 @@ class tplSimpleGrayscaleSimpleMenu
                 ]);
 
                 // --BEHAVIOR-- publicSimpleMenuItem
-                $core->callBehavior('publicSimpleMenuItem', $i, $item);
+                \dcCore::app()->callBehavior('publicSimpleMenuItem', $i, $item);
 
                 $ret .= '<li class="nav-item li' . ($i + 1) .
                     ($item['active'] ? ' active' : '') .
