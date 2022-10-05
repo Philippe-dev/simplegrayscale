@@ -14,7 +14,7 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-\l10n::set(dirname(__FILE__) . '/locales/' . $_lang . '/main');
+\l10n::set(dirname(__FILE__) . '/locales/' . dcCore::app()->lang . '/main');
 
 // Simple Grayscale random image CSS and js files
 \dcCore::app()->addBehavior('publicHeadContent', [__NAMESPACE__ . '\simpleGrayscalePublic', 'publicHeadContent']);

@@ -7,6 +7,6 @@
  * @copyright GPL-2.0-only
  */
 
-if (!isset($__resources['help']['simplegrayscale'])) {
-    $__resources['help']['simplegrayscale'] = dirname(__FILE__) . '/help/help.html';
+if (!isset(dcCore::app()->resources['help']['simplegrayscale'])) {
+    dcCore::app()->resources['help']['simplegrayscale'] = dirname(__FILE__) . '/help/help.html';
 }
