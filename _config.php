@@ -77,15 +77,15 @@ if (is_array($stickers)) {
 
 // Get social media images
 $stickers_images = ['fab fa-diaspora', 'fas fa-rss', 'fab fa-linkedin-in', 'fab fa-gitlab', 'fab fa-github', 'fab fa-twitter', 'fab fa-facebook-f',
-    'fab fa-instagram', 'fab fa-mastodon', 'fab fa-pinterest', 'fab fa-snapchat', 'fab fa-soundcloud', 'fab fa-youtube'];
+    'fab fa-instagram', 'fab fa-mastodon', 'fab fa-pinterest', 'fab fa-snapchat', 'fab fa-soundcloud', 'fab fa-youtube', ];
 if (is_array($stickers_images)) {
     foreach ($stickers_images as $v) {
         if (!in_array($v, $stickers_full)) {
             // image not already used
             $stickers[] = [
                 'label' => null,
-                'url' => null,
-                'image' => $v];
+                'url'   => null,
+                'image' => $v, ];
         }
     }
 }
@@ -142,8 +142,8 @@ if (!empty($_POST)) {
             for ($i = 0; $i < count($_POST['sticker_image']); $i++) {
                 $stickers[] = [
                     'label' => $_POST['sticker_label'][$i],
-                    'url' => $_POST['sticker_url'][$i],
-                    'image' => $_POST['sticker_image'][$i]
+                    'url'   => $_POST['sticker_url'][$i],
+                    'image' => $_POST['sticker_image'][$i],
                 ];
             }
 
@@ -158,8 +158,8 @@ if (!empty($_POST)) {
                 foreach ($order as $i => $k) {
                     $new_stickers[] = [
                         'label' => $stickers[$k]['label'],
-                        'url' => $stickers[$k]['url'],
-                        'image' => $stickers[$k]['image']
+                        'url'   => $stickers[$k]['url'],
+                        'image' => $stickers[$k]['image'],
                     ];
                 }
                 $stickers = $new_stickers;
@@ -285,10 +285,10 @@ foreach ($stickers as $i => $v) {
     echo
     '<tr class="line" id="l_' . $i . '">' .
     '<td class="handle">' . form::number(['order[' . $i . ']'], [
-        'min' => 0,
-        'max' => count($stickers),
+        'min'     => 0,
+        'max'     => count($stickers),
         'default' => $count,
-        'class' => 'position'
+        'class'   => 'position',
     ]) .
     form::hidden(['dynorder[]', 'dynorder-' . $i], $i) . '</td>' .
     '<td class="linkimg">' . form::hidden(['sticker_image[]'], $v['image']) . '<i class="' . $v['image'] . '" title="' . $v['label'] . '"></i> ' . '</td>' .
@@ -299,10 +299,10 @@ foreach ($stickers as $i => $v) {
 echo
     '</tbody>' .
     '</table></div>';
-    echo '</div>';
-    echo '<p><input type="hidden" name="conf_tab" value="links" /></p>';
-    echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
-    echo '</form>';
+echo '</div>';
+echo '<p><input type="hidden" name="conf_tab" value="links" /></p>';
+echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
+echo '</form>';
 
 echo '</div>'; // Close tab
 

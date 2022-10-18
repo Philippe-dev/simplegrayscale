@@ -8,6 +8,7 @@
  * @author Philippe aka amalgame and contributors
  * @copyright GPL-2.0
  */
+
 namespace themes\simplegrayscale;
 
 if (!defined('DC_RC_PATH')) {
@@ -30,7 +31,6 @@ class simpleGrayscalePublic
 {
     public static function publicHeadContent()
     {
-
         // Settings
         if (preg_match('#^http(s)?://#', \dcCore::app()->blog->settings->system->themes_url)) {
             $theme_url = \http::concatURL(\dcCore::app()->blog->settings->system->themes_url, '/' . \dcCore::app()->blog->settings->system->theme);
@@ -112,7 +112,6 @@ class simpleGrayscalePublic
 
     public static function publicFooterContent()
     {
-
         // Settings
         $sb = \dcCore::app()->blog->settings->themes->get(\dcCore::app()->blog->settings->system->theme . '_behavior');
         $sb = $sb ? (unserialize($sb) ?: []) : [];
@@ -181,6 +180,7 @@ class simpleGrayscalePublic
                 }
             }
         }
+
         return false;
     }
 }
@@ -190,13 +190,12 @@ class tplSimpleGrayscaleSimpleMenu
     // Template function
     public static function simpleGrayscaleSimpleMenu($attr)
     {
-
         if (!(bool) \dcCore::app()->blog->settings->system->simpleMenu_active) {
             return '';
         }
 
-        $class = isset($attr['class']) ? trim($attr['class']) : '';
-        $id = isset($attr['id']) ? trim($attr['id']) : '';
+        $class       = isset($attr['class']) ? trim($attr['class']) : '';
+        $id          = isset($attr['id']) ? trim($attr['id']) : '';
         $description = isset($attr['description']) ? trim($attr['description']) : '';
 
         if (!preg_match('#^(title|span|both|none)$#', $description)) {
@@ -212,7 +211,6 @@ class tplSimpleGrayscaleSimpleMenu
 
     public static function displayMenu($class = '', $id = '', $description = '')
     {
-
         $ret = '';
 
         if (!(bool) \dcCore::app()->blog->settings->system->simpleMenu_active) {
@@ -222,11 +220,11 @@ class tplSimpleGrayscaleSimpleMenu
         $menu = \dcCore::app()->blog->settings->system->simpleMenu;
         if (is_array($menu)) {
             // Current relative URL
-            $url = $_SERVER['REQUEST_URI'];
+            $url     = $_SERVER['REQUEST_URI'];
             $abs_url = \http::getHost() . $url;
 
             // Home recognition var
-            $home_url = \html::stripHostURL(\dcCore::app()->blog->url);
+            $home_url       = \html::stripHostURL(\dcCore::app()->blog->url);
             $home_directory = dirname($home_url);
             if ($home_directory != '/') {
                 $home_directory = $home_directory . '/';
@@ -275,12 +273,12 @@ class tplSimpleGrayscaleSimpleMenu
                 $label = \html::escapeHTML(__($m['label']));
 
                 $item = new \ArrayObject([
-                    'url' => $href,   // URL
-                    'label' => $label,  // <a> link label
-                    'title' => $title,  // <a> link title (optional)
-                    'span' => $span,   // description (will be displayed after <a> link)
+                    'url'    => $href,   // URL
+                    'label'  => $label,  // <a> link label
+                    'title'  => $title,  // <a> link title (optional)
+                    'span'   => $span,   // description (will be displayed after <a> link)
                     'active' => $active, // status (true/false)
-                    'class' => ''      // additional <li> class (optional)
+                    'class'  => '',      // additional <li> class (optional)
                 ]);
 
                 // --BEHAVIOR-- publicSimpleMenuItem
