@@ -149,7 +149,7 @@ class simpleGrayscalePublic
         $s = \dcCore::app()->blog->settings->themes->get(\dcCore::app()->blog->settings->system->theme . '_stickers');
         $s = $s ? (unserialize($s) ?: []) : [];
 
-        $s = array_filter($s, 'self::cleanSocialLinks');
+        $s = array_filter($s, self::class . '::cleanSocialLinks');
 
         $count = 0;
         foreach ($s as $sticker) {
