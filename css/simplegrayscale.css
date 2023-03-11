@@ -867,8 +867,8 @@ img.smiley {
 	8. FOOTER
 ------------------------------------------------------------- */
 ul.banner-social-buttons {
-  margin: 5em 2em 1em;
-  font-size: 1.25em;
+  margin: 1.5em;
+  font-size: 3em;
 }
 
 ul.banner-social-buttons li {
@@ -877,14 +877,14 @@ ul.banner-social-buttons li {
 
 ul.banner-social-buttons li a {
   padding: 1em;
-  margin: .2em
+  margin: 0.2em;
 }
 
 ul.banner-social-buttons li .svg-inline--fa {
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
   ul.banner-social-buttons li {
     display: block;
     margin: 2em 0;
@@ -893,9 +893,10 @@ ul.banner-social-buttons li .svg-inline--fa {
 }
 
 footer {
-  padding: 3em
+  padding: 3em;
 }
 
 footer p {
   margin: 2em 0 0 0;
 }
+

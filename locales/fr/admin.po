@@ -1,3 +1,15 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: simplegrayscale 3.0\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-03-11T11:15:38+00:00\n"
+"Last-Translator: Philippe Henaff\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 msgid "Theme configuration upgraded."
 msgstr "La configuration du thème a été mise à jour."
 
@@ -7,17 +19,14 @@ msgstr "Présentation"
 msgid "Background image"
 msgstr "Image de fond"
 
-msgid "Main background image"
-msgstr "Image de fond"
-
 msgid "default image"
 msgstr "image par défaut"
 
-msgid "Use featured media for posts"
-msgstr "Utiliser l'image à la une pour les billets"
-
 msgid "random image"
 msgstr "image aléatoire"
+
+msgid "Use featured media for posts"
+msgstr "Utiliser l'image à la une pour les billets"
 
 msgid "Images choice"
 msgstr "Choix des images"
@@ -31,8 +40,12 @@ msgstr "Images aléatoires"
 msgid "Stickers"
 msgstr "Étiquettes"
 
+msgid "Social links (footer)"
+msgstr "Lien vers les médias sociaux (pied de page)"
+
+msgid "Main background image"
+msgstr "Image de fond"
+
 msgid "Social links"
 msgstr "Liens vers les médias sociaux"
 
-msgid "Social links (footer)"
-msgstr "Lien vers les médias sociaux (pied de page)"

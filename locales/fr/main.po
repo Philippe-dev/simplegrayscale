@@ -1,62 +1,24 @@
-msgid "Additionnal style directives"
-msgstr "Directives CSS supplémentaires"
-
-msgid "reactions"
-msgstr "réactions"
-
-msgid "no reactions"
-msgstr "pas de réaction"
-
-msgid "one reaction"
-msgstr "une réaction"
-
-msgid "%s reactions"
-msgstr "%s réactions"
-
-msgid "Add ping"
-msgstr "Ajouter un rétrolien"
-
-msgid "Suggestions:"
-msgstr "Suggestions :"
-
-msgid "Go to homepage"
-msgstr "Aller à l'accueil"
-
-msgid "Use search form"
-msgstr "Faire une recherche"
-
-msgid "Explore archives"
-msgstr "Explorer les archives"
-
-msgid "By category"
-msgstr "Par catégorie"
-
-msgid "By date"
-msgstr "Par date"
-
-msgid "By tag"
-msgstr "Par tag"
-
-msgid "URL you've tried has typos, or the page has been deleted or moved."
-msgstr "L'adresse URL est erronée ou bien la page a été supprimée ou déplacée."
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: simplegrayscale 3.0\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-03-11T11:15:38+00:00\n"
+"Last-Translator: Philippe Henaff\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Error page"
 msgstr "Page d'erreur"
 
-msgid "Entries list"
-msgstr "Liste des publications"
-
 msgid "Archives list"
 msgstr "Liste des archives"
-
-msgid "Entry"
-msgstr "Publication"
-
-msgid "Page"
-msgstr "Page"
 
 msgid "Post"
 msgstr "Billet"
 
 msgid "Tags list"
 msgstr "Liste des mots-clés"
+
