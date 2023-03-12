@@ -96,7 +96,7 @@ class Frontend extends dcNsProcess
 
         # check if post has featured media
         if (dcCore::app()->ctx->posts !== null && dcCore::app()->plugins->moduleExists('featuredMedia')) {
-            dcCore::app()->ctx->featured = new \ArrayObject(dcCore::app()->media->getPostMedia(dcCore::app()->ctx->posts->post_id, null, 'featured'));
+            dcCore::app()->ctx->featured = new ArrayObject(dcCore::app()->media->getPostMedia(dcCore::app()->ctx->posts->post_id, null, 'featured'));
             foreach (dcCore::app()->ctx->featured as $featured_i => $featured_f) {
                 $GLOBALS['featured_i'] = $featured_i;
                 $GLOBALS['featured_f'] = $featured_f;
