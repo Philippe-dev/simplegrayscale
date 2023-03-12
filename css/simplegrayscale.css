@@ -383,7 +383,7 @@ pre {
 
 .post-infos {
   margin-bottom: 8em;
-  padding: 0;
+  padding: .5em 1em;
   font-size: 0.875em;
   display: table;
   width: 100%;
