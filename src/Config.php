@@ -244,7 +244,7 @@ class Config extends dcNsProcess
 
         echo '<div class="fieldset">';
 
-        echo '<h3>' . __('Background image') . '</h3>';
+        echo '<h3>' . __('Images choice') . '</h3>';
 
         echo '<p><label class="classic" for="default-image-1">' .
         form::radio(['default-image','default-image-1'], true, dcCore::app()->admin->behavior['default-image']) .
@@ -263,8 +263,6 @@ class Config extends dcNsProcess
 
         echo '<div class="fieldset">';
 
-        echo '<h3>' . __('Images choice') . '</h3>';
-
         echo '<h4 class="pretty-title">' . __('Default image') . '</h4>';
 
         echo '<div class="box theme">';
@@ -281,6 +279,9 @@ class Config extends dcNsProcess
         echo '<p class="sr-only">' . form::field('default-image-tb-url', 30, 255, dcCore::app()->admin->images['default-image-tb-url']) . '</p>';
 
         echo '</div>';
+        echo '</div>';
+        
+        echo '<div class="fieldset">';
 
         echo '<h4 class="pretty-title">' . __('Random images') . '</h4>';
 
