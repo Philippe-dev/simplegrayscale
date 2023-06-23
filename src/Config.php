@@ -347,7 +347,7 @@ class Config extends dcNsProcess
 
         echo '</div>'; // Close tab
 
-        dcPage::helpBlock('grayscale');
+        dcPage::helpBlock('simplegrayscale');
 
         // Legacy mode
         if (!dcCore::app()->admin->standalone_config) {
