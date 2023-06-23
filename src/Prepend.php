@@ -1,6 +1,6 @@
 <?php
 /**
- * @brief SimpleGrayscale, a theme for Dotclear 2
+ * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
@@ -10,44 +10,37 @@
  * @copyright Philippe Hénaff philippe@dissitou.org
  * @copyright GPL-2.0
  */
+declare(strict_types=1);
 
-namespace Dotclear\Theme\SimpleGrayscale;
+namespace Dotclear\Theme\simplegrayscale;
 
 use dcCore;
 use dcNsProcess;
 use dcPage;
-use http;
 
 class Prepend extends dcNsProcess
 {
     public static function init(): bool
     {
-        self::$init = defined('DC_CONTEXT_ADMIN');
-
-        return self::$init;
+        return (static::$init = My::checkContext(My::PREPEND));
     }
 
     public static function process(): bool
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return false;
         }
 
         dcCore::app()->addBehavior('adminPageHTMLHead', function () {
-            if (dcCore::app()->blog->settings->system->theme !== basename(dirname(__DIR__))) {
+            if (dcCore::app()->blog->settings->system->theme !== My::id()) {
                 return;
             }
 
-            if (preg_match('#^http(s)?://#', dcCore::app()->blog->settings->system->themes_url)) {
-                $theme_url = http::concatURL(dcCore::app()->blog->settings->system->themes_url, '/' . dcCore::app()->blog->settings->system->theme);
-            } else {
-                $theme_url = http::concatURL(dcCore::app()->blog->url, dcCore::app()->blog->settings->system->themes_url . '/' . dcCore::app()->blog->settings->system->theme);
-            }
-
-            echo '<script src="' . $theme_url . '/js/admin.js' . '"></script>' . "\n" .
-            '<script src="' . $theme_url . '/js/popup_media.js' . '"></script>' . "\n" .
-            '<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>' . "\n" .
-            '<link rel="stylesheet" media="screen" href="' . $theme_url . '/css/admin.css' . '" />' . "\n";
+            echo
+            My::jsLoad('admin.js') . "\n" .
+            My::jsLoad('popup_media.js') . "\n" .
+            '<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>' . "\n" .
+            My::cssLoad('admin.css') . "\n" ;
 
             dcCore::app()->auth->user_prefs->addWorkspace('accessibility');
             if (!dcCore::app()->auth->user_prefs->accessibility->nodragdrop) {
@@ -58,7 +51,7 @@ class Prepend extends dcNsProcess
         });
 
         dcCore::app()->addBehavior('adminPageHTTPHeaderCSP', function ($csp) {
-            if (dcCore::app()->blog->settings->system->theme !== basename(dirname(__DIR__))) {
+            if (dcCore::app()->blog->settings->system->theme !== My::id()) {
                 return;
             }
 

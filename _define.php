@@ -1,6 +1,6 @@
 <?php
 /**
- * @brief SimpleGrayscale, a theme for Dotclear 2
+ * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
@@ -10,17 +10,13 @@
  * @copyright Philippe Hénaff philippe@dissitou.org
  * @copyright GPL-2.0
  */
-if (!defined('DC_RC_PATH')) {
-    return;
-}
-
 $this->registerModule(
     'Simple Grayscale',
     'Simple Grayscale Bootstrap 5 theme for Dotclear',
     'Philippe aka amalgame and contributors',
-    '3.3',
+    '3.4',
     [
-        'requires'          => [['core', '2.25']],
+        'requires'          => [['core', '2.27']],
         'standalone_config' => true,
         'type'              => 'theme',
         'tplset'            => 'mustek',

@@ -1,6 +1,6 @@
 <?php
 /**
- * @brief SimpleGrayscale, a theme for Dotclear 2
+ * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
@@ -10,41 +10,33 @@
  * @copyright Philippe Hénaff philippe@dissitou.org
  * @copyright GPL-2.0
  */
+declare(strict_types=1);
 
-namespace Dotclear\Theme\SimpleGrayscale;
+namespace Dotclear\Theme\simplegrayscale;
 
 use dcCore;
 use dcNsProcess;
 use dcPage;
 use Exception;
 use form;
-use http;
-use l10n;
 
 class Config extends dcNsProcess
 {
     public static function init(): bool
     {
-        if (!defined('DC_CONTEXT_ADMIN')) {
+        // limit to backend permissions
+        static::$init = My::checkContext(My::CONFIG);
+
+        if (!static::$init) {
             return false;
         }
 
-        self::$init = true;
-
-        l10n::set(__DIR__ . '/../locales/' . dcCore::app()->lang . '/admin');
-
-        if (preg_match('#^http(s)?://#', dcCore::app()->blog->settings->system->themes_url)) {
-            $theme_url = http::concatURL(dcCore::app()->blog->settings->system->themes_url, '/' . dcCore::app()->blog->settings->system->theme);
-        } else {
-            $theme_url = http::concatURL(dcCore::app()->blog->url, dcCore::app()->blog->settings->system->themes_url . '/' . dcCore::app()->blog->settings->system->theme);
-        }
+        My::l10n('admin');
 
         dcCore::app()->admin->standalone_config = (bool) dcCore::app()->themes->moduleInfo(dcCore::app()->blog->settings->system->theme, 'standalone_config');
 
         // Load contextual help
-        if (file_exists(__DIR__ . '/../locales/' . dcCore::app()->lang . '/resources.php')) {
-            require __DIR__ . '/../locales/' . dcCore::app()->lang . '/resources.php';
-        }
+        dcCore::app()->themes->loadModuleL10Nresources(My::id(), dcCore::app()->lang);
 
         # random or default image behavior
         $behavior = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_behavior');
@@ -67,20 +59,20 @@ class Config extends dcNsProcess
         }
 
         if (!isset($images['default-image-url'])) {
-            $images['default-image-url'] = $theme_url . '/img/intro-bg.jpg';
+            $images['default-image-url'] = My::fileURL('/img/intro-bg.jpg');
         }
 
         if (!isset($images['default-image-tb-url'])) {
-            $images['default-image-tb-url'] = $theme_url . '/img/.intro-bg_s.jpg';
+            $images['default-image-tb-url'] = My::fileURL('/img/.intro-bg_s.jpg');
         }
 
         for ($i = 0; $i < 6; $i++) {
             if (!isset($images['random-image-' . $i . '-url'])) {
-                $images['random-image-' . $i . '-url'] = $theme_url . '/img/bg-intro-' . $i . '.jpg';
+                $images['random-image-' . $i . '-url'] = My::fileURL('/img/bg-intro-' . $i . '.jpg');
             }
 
             if (!isset($images['random-image-' . $i . '-tb-url'])) {
-                $images['random-image-' . $i . '-tb-url'] = $theme_url . '/img/.bg-intro-' . $i . '_s.jpg';
+                $images['random-image-' . $i . '-tb-url'] = My::fileURL('/img/.bg-intro-' . $i . '_s.jpg');
             }
         }
 
@@ -113,12 +105,11 @@ class Config extends dcNsProcess
             }
         }
 
-        dcCore::app()->admin->behavior  = $behavior;
-        dcCore::app()->admin->images    = $images;
-        dcCore::app()->admin->stickers  = $stickers;
-        dcCore::app()->admin->theme_url = $theme_url;
+        dcCore::app()->admin->behavior = $behavior;
+        dcCore::app()->admin->images   = $images;
+        dcCore::app()->admin->stickers = $stickers;
 
-        dcCore::app()->admin->conf_tab = $_POST['conf_tab'] ?? 'presentation';
+        dcCore::app()->admin->conf_tab = $_POST['conf_tab'] ?? 'images';
 
         return self::$init;
     }
@@ -128,14 +119,14 @@ class Config extends dcNsProcess
      */
     public static function process(): bool
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return false;
         }
 
         if (!empty($_POST)) {
             try {
                 // HTML
-                if (dcCore::app()->admin->conf_tab === 'presentation') {
+                if (dcCore::app()->admin->conf_tab === 'images') {
                     # random or default image behavior
                     $behavior['default-image'] = $_POST['default-image'];
 
@@ -146,14 +137,14 @@ class Config extends dcNsProcess
                     if (!empty($_POST['default-image-url'])) {
                         $images['default-image-url'] = $_POST['default-image-url'];
                     } else {
-                        $images['default-image-url'] = dcCore::app()->admin->theme_url . '/img/intro-bg.jpg';
+                        $images['default-image-url'] = My::fileURL('/img/intro-bg.jpg');
                     }
 
                     # default image thumbnail settings
                     if (!empty($_POST['default-image-tb-url'])) {
                         $images['default-image-tb-url'] = $_POST['default-image-tb-url'];
                     } else {
-                        $images['default-image-tb-url'] = dcCore::app()->admin->theme_url . '/.intro-bg_s.jpg';
+                        $images['default-image-tb-url'] = My::fileURL('/img/.intro-bg_s.jpg') . '/';
                     }
 
                     for ($i = 0; $i < 6; $i++) {
@@ -161,14 +152,14 @@ class Config extends dcNsProcess
                         if (!empty($_POST['random-image-' . $i . '-url'])) {
                             $images['random-image-' . $i . '-url'] = $_POST['random-image-' . $i . '-url'];
                         } else {
-                            $images['random-image-' . $i . '-url'] = dcCore::app()->admin->theme_url . '/img/bg-intro-' . $i . '.jpg';
+                            $images['random-image-' . $i . '-url'] = My::fileURL('/img/bg-intro-' . $i . '.jpg');
                         }
 
                         # random images thumbnail settings
                         if (!empty($_POST['random-image-' . $i . '-tb-url'])) {
                             $images['random-image-' . $i . '-tb-url'] = $_POST['random-image-' . $i . '-tb-url'];
                         } else {
-                            $images['random-image-' . $i . '-tb-url'] = dcCore::app()->admin->theme_url . '/img/.bg-intro-' . $i . '_s.jpg';
+                            $images['random-image-' . $i . '-tb-url'] = My::fileURL('/img/.bg-intro-' . $i . '_s.jpg');
                         }
                     }
 
@@ -176,7 +167,7 @@ class Config extends dcNsProcess
                     dcCore::app()->admin->images   = $images;
                 }
 
-                if (dcCore::app()->admin->conf_tab === 'links') {
+                if (dcCore::app()->admin->conf_tab === 'stickers') {
                     $stickers = [];
                     for ($i = 0; $i < count($_POST['sticker_image']); $i++) {
                         $stickers[] = [
@@ -215,7 +206,7 @@ class Config extends dcNsProcess
                 // Template cache reset
                 dcCore::app()->emptyTemplatesCache();
 
-                dcPage::message(__('Theme configuration upgraded.'), true, true);
+                dcPage::success(__('Theme configuration upgraded.'), true, true);
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -229,7 +220,7 @@ class Config extends dcNsProcess
      */
     public static function render(): void
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return;
         }
 
@@ -237,14 +228,14 @@ class Config extends dcNsProcess
             echo '</form>';
         }
 
-        echo '<div class="multi-part" id="themes-list' . (dcCore::app()->admin->conf_tab === 'presentation' ? '' : '-presentation') . '" title="' . __('Presentation') . '">';
+        echo '<div class="multi-part" id="images" title="' . __('Images') . '">';
 
         echo '<form id="theme_config" action="' . dcCore::app()->adminurl->get('admin.blog.theme', ['conf' => '1']) .
             '" method="post" enctype="multipart/form-data">';
 
         echo '<div class="fieldset">';
 
-        echo '<h3>' . __('Images choice') . '</h3>';
+        echo '<h3>' . __('Display options') . '</h3>';
 
         echo '<p><label class="classic" for="default-image-1">' .
         form::radio(['default-image','default-image-1'], true, dcCore::app()->admin->behavior['default-image']) .
@@ -263,7 +254,7 @@ class Config extends dcNsProcess
 
         echo '<div class="fieldset">';
 
-        echo '<h4 class="pretty-title">' . __('Default image') . '</h4>';
+        echo '<h3>' . __('Default image') . '</h3>';
 
         echo '<div class="box theme">';
 
@@ -271,7 +262,7 @@ class Config extends dcNsProcess
         '<img id="default-image-thumb-src" alt="' . __('Thumbnail') . '" src="' . dcCore::app()->admin->images['default-image-tb-url'] . '" width="240" height="160" />' .
         '</p>';
 
-        echo '<p class="grayscale-buttons"><button type="button" id="default-image-selector">' . __('Change') . '</button>' .
+        echo '<p class="simplegrayscale-buttons"><button type="button" id="default-image-selector">' . __('Change') . '</button>' .
         '<button class="delete" type="button" id="default-image-selector-reset">' . __('Reset') . '</button>' .
         '</p>' ;
 
@@ -280,10 +271,10 @@ class Config extends dcNsProcess
 
         echo '</div>';
         echo '</div>';
-        
+
         echo '<div class="fieldset">';
 
-        echo '<h4 class="pretty-title">' . __('Random images') . '</h4>';
+        echo '<h3>' . __('Random images') . '</h3>';
 
         for ($i = 0; $i < 6; $i++) {
             echo '<div class="box theme">';
@@ -292,7 +283,7 @@ class Config extends dcNsProcess
             '<img id="random-image-' . $i . '-thumb-src" alt="' . __('Thumbnail') . '" src="' . dcCore::app()->admin->images['random-image-' . $i . '-tb-url'] . '" width="240" height="160" />' .
             '</p>';
 
-            echo '<p class="grayscale-buttons"><button type="button" id="random-image-' . $i . '-selector">' . __('Change') . '</button>' .
+            echo '<p class="simplegrayscale-buttons"><button type="button" id="random-image-' . $i . '-selector">' . __('Change') . '</button>' .
             '<button class="delete" type="button" id="random-image-' . $i . '-selector-reset">' . __('Reset') . '</button>' . '</p>' ;
 
             echo '<p class="sr-only">' . form::field('random-image-' . $i . '-url', 30, 255, dcCore::app()->admin->images['random-image-' . $i . '-url']) . '</p>';
@@ -302,14 +293,14 @@ class Config extends dcNsProcess
         }
 
         echo '</div>';
-        echo '<p><input type="hidden" name="conf_tab" value="presentation" /></p>';
+        echo '<p><input type="hidden" name="conf_tab" value="images" /></p>';
         echo '<p class="clear"><input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
-        echo form::hidden(['theme-url'], dcCore::app()->admin->theme_url);
+        echo form::hidden(['theme-url'], My::fileURL(''));
         echo form::hidden(['change-button-id'], '');
         echo '</form>';
         echo '</div>'; // Close tab
 
-        echo '<div class="multi-part" id="themes-list' . (dcCore::app()->admin->conf_tab === 'links' ? '' : '-links') . '" title="' . __('Stickers') . '">';
+        echo '<div class="multi-part" id="stickers" title="' . __('Stickers') . '">';
         echo '<form id="theme_config" action="' . dcCore::app()->adminurl->get('admin.blog.theme', ['conf' => '1']) .
             '" method="post" enctype="multipart/form-data">';
 
@@ -350,7 +341,7 @@ class Config extends dcNsProcess
             '</tbody>' .
             '</table></div>';
         echo '</div>';
-        echo '<p><input type="hidden" name="conf_tab" value="links" /></p>';
+        echo '<p><input type="hidden" name="conf_tab" value="stickers" /></p>';
         echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
         echo '</form>';
 

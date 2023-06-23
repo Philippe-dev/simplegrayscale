@@ -1,6 +1,6 @@
 <?php
 /**
- * @brief SimpleGrayscale, a theme for Dotclear 2
+ * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
@@ -10,32 +10,31 @@
  * @copyright Philippe Hénaff philippe@dissitou.org
  * @copyright GPL-2.0
  */
+declare(strict_types=1);
 
-namespace Dotclear\Theme\SimpleGrayscale;
+namespace Dotclear\Theme\simplegrayscale;
 
 use ArrayObject;
 use dcCore;
 use dcNsProcess;
-use l10n;
-use http;
-use html;
+use Dotclear\Helper\Html\Html;
+use Dotclear\Helper\Network\Http;
 
 class Frontend extends dcNsProcess
 {
     public static function init(): bool
     {
-        self::$init = defined('DC_RC_PATH');
-
-        return self::$init;
+        return (static::$init = My::checkContext(My::FRONTEND));
     }
 
     public static function process(): bool
     {
-        if (!self::$init) {
+        if (!static::$init) {
             return false;
         }
 
-        l10n::set(__DIR__ . '/../locales/' . dcCore::app()->lang . '/main');
+        # load locales
+        My::l10n('main');
 
         # Templates
         dcCore::app()->addBehavior('publicHeadContent', [self::class, 'publicHeadContent']);
@@ -48,13 +47,6 @@ class Frontend extends dcNsProcess
 
     public static function publicHeadContent()
     {
-        # Settings
-        if (preg_match('#^http(s)?://#', dcCore::app()->blog->settings->system->themes_url)) {
-            $theme_url = http::concatURL(dcCore::app()->blog->settings->system->themes_url, '/' . dcCore::app()->blog->settings->system->theme);
-        } else {
-            $theme_url = http::concatURL(dcCore::app()->blog->url, dcCore::app()->blog->settings->system->themes_url . '/' . dcCore::app()->blog->settings->system->theme);
-        }
-
         $sb = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_behavior');
         $sb = $sb ? (unserialize($sb) ?: []) : [];
 
@@ -78,25 +70,25 @@ class Frontend extends dcNsProcess
         }
 
         if (!isset($si['default-image-url'])) {
-            $si['default-image-url'] = $theme_url . '/img/intro-bg.jpg';
+            $si['default-image-url'] = My::fileURL('/img/intro-bg.jpg');
         }
 
         if (!isset($si['default-image-tb-url'])) {
-            $si['default-image-tb-url'] = $theme_url . '/img/.intro-bg_s.jpg';
+            $si['default-image-tb-url'] = My::fileURL('/img/.intro-bg_s.jpg');
         }
 
         for ($i = 0; $i < 6; $i++) {
             if (!isset($si['random-image-' . $i . '-url'])) {
-                $si['random-image-' . $i . '-url'] = $theme_url . '/img/bg-intro-' . $i . '.jpg';
+                $si['random-image-' . $i . '-url'] = My::fileURL('/img/bg-intro-' . $i . '.jpg');
             }
             if (!isset($si['random-image-' . $i . '-tb-url'])) {
-                $si['random-image-' . $i . '-tb-url'] = $theme_url . '/img/.bg-intro-' . $i . '_s.jpg';
+                $si['random-image-' . $i . '-tb-url'] = My::fileURL('/img/.bg-intro-' . $i . '_s.jpg');
             }
         }
 
         # check if post has featured media
         if (dcCore::app()->ctx->posts !== null && dcCore::app()->plugins->moduleExists('featuredMedia')) {
-            dcCore::app()->ctx->featured = new ArrayObject(dcCore::app()->media->getPostMedia(dcCore::app()->ctx->posts->post_id, null, 'featured'));
+            dcCore::app()->ctx->featured = new ArrayObject(dcCore::app()->media->getPostMedia((int) dcCore::app()->ctx->posts->post_id, null, 'featured'));
             foreach (dcCore::app()->ctx->featured as $featured_i => $featured_f) {
                 $GLOBALS['featured_i'] = $featured_i;
                 $GLOBALS['featured_f'] = $featured_f;
@@ -185,10 +177,10 @@ class Frontend extends dcNsProcess
         if (is_array($menu)) {
             // Current relative URL
             $url     = $_SERVER['REQUEST_URI'];
-            $abs_url = http::getHost() . $url;
+            $abs_url = Http::getHost() . $url;
 
             // Home recognition var
-            $home_url       = html::stripHostURL(dcCore::app()->blog->url);
+            $home_url       = Html::stripHostURL(dcCore::app()->blog->url);
             $home_directory = dirname($home_url);
             if ($home_directory != '/') {
                 $home_directory = $home_directory . '/';
@@ -198,7 +190,7 @@ class Frontend extends dcNsProcess
             foreach ($menu as $i => $m) {
                 # $href = lien de l'item de menu
                 $href = $m['url'];
-                $href = html::escapeHTML($href);
+                $href = Html::escapeHTML($href);
 
                 # Cope with request only URL (ie ?query_part)
                 $href_part = '';
@@ -217,13 +209,13 @@ class Frontend extends dcNsProcess
 
                 if ($m['descr']) {
                     if (($description == 'title' || $description == 'both') && $targetBlank) {
-                        $title = html::escapeHTML(__($m['descr'])) . ' (' .
+                        $title = Html::escapeHTML(__($m['descr'])) . ' (' .
                         __('new window') . ')';
                     } elseif ($description == 'title' || $description == 'both') {
-                        $title = html::escapeHTML(__($m['descr']));
+                        $title = Html::escapeHTML(__($m['descr']));
                     }
                     if ($description == 'span' || $description == 'both') {
-                        $span = ' <span class="simple-menu-descr">' . html::escapeHTML(__($m['descr'])) . '</span>';
+                        $span = ' <span class="simple-menu-descr">' . Html::escapeHTML(__($m['descr'])) . '</span>';
                     }
                 }
 
@@ -234,7 +226,7 @@ class Frontend extends dcNsProcess
                     $title = (empty($title) ? __('Active page') : $title . ' (' . __('active page') . ')');
                 }
 
-                $label = html::escapeHTML(__($m['label']));
+                $label = Html::escapeHTML(__($m['label']));
 
                 $item = new ArrayObject([
                     'url'    => $href,   // URL
