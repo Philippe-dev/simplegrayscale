@@ -2,7 +2,11 @@ $(function () {
     // default image
     $('#default-image-selector').on('click', function (e) {
         $('input[name="change-button-id"]').val(this.id);
-        window.open('media.php?plugin_id=admin.blog.theme&popup=1&select=1', 'dc_popup', 'alwaysRaised=yes,dependent=yes,toolbar=yes,height=500,width=760,menubar=no,resizable=yes,scrollbars=yes,status=no');
+        window.open(
+            'index.php?process=Media&plugin_id=admin.blog.theme&popup=1&select=1',
+            'dc_popup',
+            'alwaysRaised=yes,dependent=yes,toolbar=yes,height=500,width=760,menubar=no,resizable=yes,scrollbars=yes,status=no',
+        );
         e.preventDefault();
         return false;
     });
@@ -28,7 +32,11 @@ $(function () {
     for (let i = 0; i < 6; i++) {
         $(`#random-image-${i}-selector`).on('click', function (e) {
             $('input[name="change-button-id"]').val(this.id);
-            window.open('media.php?plugin_id=admin.blog.theme&popup=1&select=1', 'dc_popup', 'alwaysRaised=yes,dependent=yes,toolbar=yes,height=500,width=760,menubar=no,resizable=yes,scrollbars=yes,status=no');
+            window.open(
+                'index.php?process=Media&plugin_id=admin.blog.theme&popup=1&select=1',
+                'dc_popup',
+                'alwaysRaised=yes,dependent=yes,toolbar=yes,height=500,width=760,menubar=no,resizable=yes,scrollbars=yes,status=no',
+            );
             e.preventDefault();
             return false;
         });
