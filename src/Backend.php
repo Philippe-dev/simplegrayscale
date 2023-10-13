@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Theme\simplegrayscale;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Dotclear\Core\Backend\Page;
 
@@ -30,37 +30,38 @@ class Backend extends Process
         if (!self::status()) {
             return false;
         }
+        if (defined('DC_CONTEXT_ADMIN')) {
+            App::behavior()->addBehavior('adminPageHTMLHead', function () {
+                if (App::blog()->settings->system->theme !== My::id()) {
+                    return;
+                }
 
-        dcCore::app()->addBehavior('adminPageHTMLHead', function () {
-            if (dcCore::app()->blog->settings->system->theme !== My::id()) {
-                return;
-            }
-
-            echo
-            My::jsLoad('admin.js') . "\n" .
-            My::jsLoad('popup_media.js') . "\n" .
-            '<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>' . "\n" .
-            My::cssLoad('admin.css') . "\n" ;
-
-            dcCore::app()->auth->user_prefs->addWorkspace('accessibility');
-            if (!dcCore::app()->auth->user_prefs->accessibility->nodragdrop) {
                 echo
-                Page::jsLoad('js/jquery/jquery-ui.custom.js') .
-                Page::jsLoad('js/jquery/jquery.ui.touch-punch.js');
-            }
-        });
+                My::jsLoad('admin.js') . "\n" .
+                My::jsLoad('popup_media.js') . "\n" .
+                '<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>' . "\n" .
+                My::cssLoad('admin.css') . "\n" ;
 
-        dcCore::app()->addBehavior('adminPageHTTPHeaderCSP', function ($csp) {
-            if (dcCore::app()->blog->settings->system->theme !== My::id()) {
-                return;
-            }
+                App::auth()->user_prefs->addWorkspace('accessibility');
+                if (!App::auth()->user_prefs->accessibility->nodragdrop) {
+                    echo
+                    Page::jsLoad('js/jquery/jquery-ui.custom.js') .
+                    Page::jsLoad('js/jquery/jquery.ui.touch-punch.js');
+                }
+            });
 
-            if (isset($csp['script-src'])) {
-                $csp['script-src'] .= ' use.fontawesome.com';
-            } else {
-                $csp['script-src'] = 'use.fontawesome.com';
-            }
-        });
+            App::behavior()->addBehavior('adminPageHTTPHeaderCSP', function ($csp) {
+                if (App::blog()->settings->system->theme !== My::id()) {
+                    return;
+                }
+
+                if (isset($csp['script-src'])) {
+                    $csp['script-src'] .= ' use.fontawesome.com';
+                } else {
+                    $csp['script-src'] = 'use.fontawesome.com';
+                }
+            });
+        }
 
         return true;
     }

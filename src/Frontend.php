@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Theme\simplegrayscale;
 
 use ArrayObject;
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Network\Http;
@@ -37,17 +37,17 @@ class Frontend extends Process
         My::l10n('main');
 
         # Templates
-        dcCore::app()->addBehavior('publicHeadContent', [self::class, 'publicHeadContent']);
-        dcCore::app()->addBehavior('publicFooterContent', [self::class, 'publicFooterContent']);
-        dcCore::app()->tpl->addValue('simpleGrayscaleSimpleMenu', [self::class, 'simpleGrayscaleSimpleMenu']);
-        dcCore::app()->tpl->addValue('simpleGrayscaleSocialLinks', [self::class, 'simpleGrayscaleSocialLinks']);
+        App::behavior()->addBehavior('publicHeadContent', [self::class, 'publicHeadContent']);
+        App::behavior()->addBehavior('publicFooterContent', [self::class, 'publicFooterContent']);
+        App::frontend()->tpl->addValue('simpleGrayscaleSimpleMenu', [self::class, 'simpleGrayscaleSimpleMenu']);
+        App::frontend()->tpl->addValue('simpleGrayscaleSocialLinks', [self::class, 'simpleGrayscaleSocialLinks']);
 
         return true;
     }
 
     public static function publicHeadContent()
     {
-        $sb = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_behavior');
+        $sb = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_behavior');
         $sb = $sb ? (unserialize($sb) ?: []) : [];
 
         if (!is_array($sb)) {
@@ -62,7 +62,7 @@ class Frontend extends Process
             $sb['use-featuredMedia'] = 0;
         }
 
-        $si = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_images');
+        $si = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_images');
         $si = $si ? (unserialize($si) ?: []) : [];
 
         if (!is_array($si)) {
@@ -87,9 +87,9 @@ class Frontend extends Process
         }
 
         # check if post has featured media
-        if (dcCore::app()->ctx->posts !== null && dcCore::app()->plugins->moduleExists('featuredMedia')) {
-            dcCore::app()->ctx->featured = new ArrayObject(dcCore::app()->media->getPostMedia((int) dcCore::app()->ctx->posts->post_id, null, 'featured'));
-            foreach (dcCore::app()->ctx->featured as $featured_i => $featured_f) {
+        if (App::frontend()->ctx->posts !== null && App::plugins()->moduleExists('featuredMedia')) {
+            App::frontend()->ctx->featured = new ArrayObject(App::media()->getPostMedia((int) App::frontend()->ctx->posts->post_id, null, 'featured'));
+            foreach (App::frontend()->ctx->featured as $featured_i => $featured_f) {
                 $GLOBALS['featured_i'] = $featured_i;
                 $GLOBALS['featured_f'] = $featured_f;
             }
@@ -121,7 +121,7 @@ class Frontend extends Process
     public static function publicFooterContent()
     {
         # Settings
-        $sb = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_behavior');
+        $sb = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_behavior');
         $sb = $sb ? (unserialize($sb) ?: []) : [];
 
         if (!is_array($sb)) {
@@ -146,7 +146,7 @@ class Frontend extends Process
 
     public static function simpleGrayscaleSimpleMenu(ArrayObject $attr): string
     {
-        if (!(bool) dcCore::app()->blog->settings->system->simpleMenu_active) {
+        if (!(bool) App::blog()->settings->system->simpleMenu_active) {
             return '';
         }
 
@@ -169,18 +169,18 @@ class Frontend extends Process
     {
         $ret = '';
 
-        if (!(bool) dcCore::app()->blog->settings->system->simpleMenu_active) {
+        if (!(bool) App::blog()->settings->system->simpleMenu_active) {
             return $ret;
         }
 
-        $menu = dcCore::app()->blog->settings->system->simpleMenu;
+        $menu = App::blog()->settings->system->simpleMenu;
         if (is_array($menu)) {
             // Current relative URL
             $url     = $_SERVER['REQUEST_URI'];
             $abs_url = Http::getHost() . $url;
 
             // Home recognition var
-            $home_url       = Html::stripHostURL(dcCore::app()->blog->url);
+            $home_url       = Html::stripHostURL(App::blog()->url);
             $home_directory = dirname($home_url);
             if ($home_directory != '/') {
                 $home_directory = $home_directory . '/';
@@ -238,7 +238,7 @@ class Frontend extends Process
                 ]);
 
                 # --BEHAVIOR-- publicSimpleMenuItem
-                dcCore::app()->callBehavior('publicSimpleMenuItem', $i, $item);
+                App::behavior()->callBehavior('publicSimpleMenuItem', $i, $item);
 
                 $ret .= '<li class="nav-item li' . ($i + 1) .
                     ($item['active'] ? ' active' : '') .
@@ -271,7 +271,7 @@ class Frontend extends Process
         # Social media links
         $res = '';
 
-        $style = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_stickers');
+        $style = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_stickers');
 
         if ($style === null) {
             $default = true;

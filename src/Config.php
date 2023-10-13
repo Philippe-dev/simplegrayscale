@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Theme\simplegrayscale;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Backend\Notices;
@@ -32,13 +32,13 @@ class Config extends Process
 
         My::l10n('admin');
 
-        dcCore::app()->admin->standalone_config = (bool) dcCore::app()->themes->moduleInfo(dcCore::app()->blog->settings->system->theme, 'standalone_config');
+        App::backend()->standalone_config = (bool) App::themes()->moduleInfo(App::blog()->settings->system->theme, 'standalone_config');
 
         // Load contextual help
-        dcCore::app()->themes->loadModuleL10Nresources(My::id(), dcCore::app()->lang);
+        App::themes()->loadModuleL10Nresources(My::id(), App::lang()->getLang());
 
         # random or default image behavior
-        $behavior = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_behavior');
+        $behavior = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_behavior');
         $behavior = $behavior ? (unserialize($behavior) ?: []) : [];
 
         if (!is_array($behavior)) {
@@ -50,7 +50,7 @@ class Config extends Process
         }
 
         # default or user defined images settings
-        $images = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_images');
+        $images = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_images');
         $images = $images ? (unserialize($images) ?: []) : [];
 
         if (!is_array($images)) {
@@ -79,7 +79,7 @@ class Config extends Process
             $behavior['use-featuredMedia'] = 0;
         }
 
-        $stickers = dcCore::app()->blog->settings->themes->get(dcCore::app()->blog->settings->system->theme . '_stickers');
+        $stickers = App::blog()->settings->themes->get(App::blog()->settings->system->theme . '_stickers');
         $stickers = $stickers ? (unserialize($stickers) ?: []) : [];
 
         $stickers_full = [];
@@ -104,11 +104,11 @@ class Config extends Process
             }
         }
 
-        dcCore::app()->admin->behavior = $behavior;
-        dcCore::app()->admin->images   = $images;
-        dcCore::app()->admin->stickers = $stickers;
+        App::backend()->behavior = $behavior;
+        App::backend()->images   = $images;
+        App::backend()->stickers = $stickers;
 
-        dcCore::app()->admin->conf_tab = $_POST['conf_tab'] ?? 'images';
+        App::backend()->conf_tab = $_POST['conf_tab'] ?? 'images';
 
         return self::status();
     }
@@ -125,7 +125,7 @@ class Config extends Process
         if (!empty($_POST)) {
             try {
                 // HTML
-                if (dcCore::app()->admin->conf_tab === 'images') {
+                if (App::backend()->conf_tab === 'images') {
                     # random or default image behavior
                     $behavior['default-image'] = $_POST['default-image'];
 
@@ -162,11 +162,11 @@ class Config extends Process
                         }
                     }
 
-                    dcCore::app()->admin->behavior = $behavior;
-                    dcCore::app()->admin->images   = $images;
+                    App::backend()->behavior = $behavior;
+                    App::backend()->images   = $images;
                 }
 
-                if (dcCore::app()->admin->conf_tab === 'stickers') {
+                if (App::backend()->conf_tab === 'stickers') {
                     $stickers = [];
                     for ($i = 0; $i < count($_POST['sticker_image']); $i++) {
                         $stickers[] = [
@@ -193,21 +193,21 @@ class Config extends Process
                         }
                         $stickers = $new_stickers;
                     }
-                    dcCore::app()->admin->stickers = $stickers;
+                    App::backend()->stickers = $stickers;
                 }
-                dcCore::app()->blog->settings->themes->put(dcCore::app()->blog->settings->system->theme . '_behavior', serialize(dcCore::app()->admin->behavior));
-                dcCore::app()->blog->settings->themes->put(dcCore::app()->blog->settings->system->theme . '_images', serialize(dcCore::app()->admin->images));
-                dcCore::app()->blog->settings->themes->put(dcCore::app()->blog->settings->system->theme . '_stickers', serialize(dcCore::app()->admin->stickers));
+                App::blog()->settings->themes->put(App::blog()->settings->system->theme . '_behavior', serialize(App::backend()->behavior));
+                App::blog()->settings->themes->put(App::blog()->settings->system->theme . '_images', serialize(App::backend()->images));
+                App::blog()->settings->themes->put(App::blog()->settings->system->theme . '_stickers', serialize(App::backend()->stickers));
 
                 // Blog refresh
-                dcCore::app()->blog->triggerBlog();
+                App::blog()->triggerBlog();
 
                 // Template cache reset
-                dcCore::app()->emptyTemplatesCache();
+                App::cache()->emptyTemplatesCache();
 
-                Notices::success(__('Theme configuration upgraded.'), true, true);
+                Notices::message(__('Theme configuration upgraded.'), true, true);
             } catch (Exception $e) {
-                dcCore::app()->error->add($e->getMessage());
+                App::error()->add($e->getMessage());
             }
         }
 
@@ -223,13 +223,13 @@ class Config extends Process
             return;
         }
 
-        if (!dcCore::app()->admin->standalone_config) {
+        if (!App::backend()->standalone_config) {
             echo '</form>';
         }
 
         echo '<div class="multi-part" id="images" title="' . __('Images') . '">';
 
-        echo '<form id="theme_config" action="' . dcCore::app()->adminurl->get('admin.blog.theme', ['conf' => '1']) .
+        echo '<form id="theme_config" action="' . App::backend()->url->get('admin.blog.theme', ['conf' => '1']) .
             '" method="post" enctype="multipart/form-data">';
 
         echo '<div class="fieldset">';
@@ -237,15 +237,15 @@ class Config extends Process
         echo '<h3>' . __('Display options') . '</h3>';
 
         echo '<p><label class="classic" for="default-image-1">' .
-        form::radio(['default-image','default-image-1'], true, dcCore::app()->admin->behavior['default-image']) .
+        form::radio(['default-image','default-image-1'], true, App::backend()->behavior['default-image']) .
         __('default image') . '</label></p>' .
         '<p><label class="classic" for="default-image-2">' .
-        form::radio(['default-image','default-image-2'], false, !dcCore::app()->admin->behavior['default-image']) .
+        form::radio(['default-image','default-image-2'], false, !App::backend()->behavior['default-image']) .
         __('random image') . '</label></p>';
 
-        if (dcCore::app()->plugins->moduleExists('featuredMedia')) {
+        if (App::plugins()->moduleExists('featuredMedia')) {
             echo '<p class="vertical-separator"><label class="classic" for="use-featuredMedia">' .
-                form::checkbox('use-featuredMedia', '1', dcCore::app()->admin->behavior['use-featuredMedia']) .
+                form::checkbox('use-featuredMedia', '1', App::backend()->behavior['use-featuredMedia']) .
                 __('Use featured media for posts') . '</label></p>';
         }
 
@@ -258,15 +258,15 @@ class Config extends Process
         echo '<div class="box theme">';
 
         echo '<p> ' .
-        '<img id="default-image-thumb-src" alt="' . __('Thumbnail') . '" src="' . dcCore::app()->admin->images['default-image-tb-url'] . '" width="240" height="160" />' .
+        '<img id="default-image-thumb-src" alt="' . __('Thumbnail') . '" src="' . App::backend()->images['default-image-tb-url'] . '" width="240" height="160" />' .
         '</p>';
 
         echo '<p class="simplegrayscale-buttons"><button type="button" id="default-image-selector">' . __('Change') . '</button>' .
         '<button class="delete" type="button" id="default-image-selector-reset">' . __('Reset') . '</button>' .
         '</p>' ;
 
-        echo '<p class="sr-only">' . form::field('default-image-url', 30, 255, dcCore::app()->admin->images['default-image-url']) . '</p>';
-        echo '<p class="sr-only">' . form::field('default-image-tb-url', 30, 255, dcCore::app()->admin->images['default-image-tb-url']) . '</p>';
+        echo '<p class="sr-only">' . form::field('default-image-url', 30, 255, App::backend()->images['default-image-url']) . '</p>';
+        echo '<p class="sr-only">' . form::field('default-image-tb-url', 30, 255, App::backend()->images['default-image-tb-url']) . '</p>';
 
         echo '</div>';
         echo '</div>';
@@ -279,28 +279,28 @@ class Config extends Process
             echo '<div class="box theme">';
 
             echo '<p> ' .
-            '<img id="random-image-' . $i . '-thumb-src" alt="' . __('Thumbnail') . '" src="' . dcCore::app()->admin->images['random-image-' . $i . '-tb-url'] . '" width="240" height="160" />' .
+            '<img id="random-image-' . $i . '-thumb-src" alt="' . __('Thumbnail') . '" src="' . App::backend()->images['random-image-' . $i . '-tb-url'] . '" width="240" height="160" />' .
             '</p>';
 
             echo '<p class="simplegrayscale-buttons"><button type="button" id="random-image-' . $i . '-selector">' . __('Change') . '</button>' .
             '<button class="delete" type="button" id="random-image-' . $i . '-selector-reset">' . __('Reset') . '</button>' . '</p>' ;
 
-            echo '<p class="sr-only">' . form::field('random-image-' . $i . '-url', 30, 255, dcCore::app()->admin->images['random-image-' . $i . '-url']) . '</p>';
-            echo '<p class="sr-only">' . form::field('random-image-' . $i . '-tb-url', 30, 255, dcCore::app()->admin->images['random-image-' . $i . '-tb-url']) . '</p>';
+            echo '<p class="sr-only">' . form::field('random-image-' . $i . '-url', 30, 255, App::backend()->images['random-image-' . $i . '-url']) . '</p>';
+            echo '<p class="sr-only">' . form::field('random-image-' . $i . '-tb-url', 30, 255, App::backend()->images['random-image-' . $i . '-tb-url']) . '</p>';
 
             echo '</div>';
         }
 
         echo '</div>';
         echo '<p><input type="hidden" name="conf_tab" value="images" /></p>';
-        echo '<p class="clear"><input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
+        echo '<p class="clear"><input type="submit" value="' . __('Save') . '" />' . App::nonce()->getFormNonce() . '</p>';
         echo form::hidden(['theme-url'], My::fileURL(''));
         echo form::hidden(['change-button-id'], '');
         echo '</form>';
         echo '</div>'; // Close tab
 
         echo '<div class="multi-part" id="stickers" title="' . __('Stickers') . '">';
-        echo '<form id="theme_config" action="' . dcCore::app()->adminurl->get('admin.blog.theme', ['conf' => '1']) .
+        echo '<form id="theme_config" action="' . App::backend()->url->get('admin.blog.theme', ['conf' => '1']) .
             '" method="post" enctype="multipart/form-data">';
 
         echo '<div class="fieldset">';
@@ -320,13 +320,13 @@ class Config extends Process
             '</thead>' .
             '<tbody id="stickerslist">';
         $count = 0;
-        foreach (dcCore::app()->admin->stickers as $i => $v) {
+        foreach (App::backend()->stickers as $i => $v) {
             $count++;
             echo
             '<tr class="line" id="l_' . $i . '">' .
             '<td class="handle">' . form::number(['order[' . $i . ']'], [
                 'min'     => 0,
-                'max'     => count(dcCore::app()->admin->stickers),
+                'max'     => count(App::backend()->stickers),
                 'default' => $count,
                 'class'   => 'position',
             ]) .
@@ -341,7 +341,7 @@ class Config extends Process
             '</table></div>';
         echo '</div>';
         echo '<p><input type="hidden" name="conf_tab" value="stickers" /></p>';
-        echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . dcCore::app()->formNonce() . '</p>';
+        echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . App::nonce()->getFormNonce() . '</p>';
         echo '</form>';
 
         echo '</div>'; // Close tab
@@ -349,7 +349,7 @@ class Config extends Process
         Page::helpBlock('simplegrayscale');
 
         // Legacy mode
-        if (!dcCore::app()->admin->standalone_config) {
+        if (!App::backend()->standalone_config) {
             echo '<form style="display:none">';
         }
     }
