@@ -229,7 +229,7 @@ class Config extends Process
 
         echo '<div class="multi-part" id="images" title="' . __('Images') . '">';
 
-        echo '<form id="theme_config" action="' . App::backend()->url->get('admin.blog.theme', ['conf' => '1']) .
+        echo '<form id="theme_config" action="' . App::backend()->url()->get('admin.blog.theme', ['conf' => '1']) .
             '" method="post" enctype="multipart/form-data">';
 
         echo '<div class="fieldset">';
@@ -300,7 +300,7 @@ class Config extends Process
         echo '</div>'; // Close tab
 
         echo '<div class="multi-part" id="stickers" title="' . __('Stickers') . '">';
-        echo '<form id="theme_config" action="' . App::backend()->url->get('admin.blog.theme', ['conf' => '1']) .
+        echo '<form id="theme_config" action="' . App::backend()->url()->get('admin.blog.theme', ['conf' => '1']) .
             '" method="post" enctype="multipart/form-data">';
 
         echo '<div class="fieldset">';
