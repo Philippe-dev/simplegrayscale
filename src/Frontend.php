@@ -87,9 +87,9 @@ class Frontend extends Process
         }
 
         # check if post has featured media
-        if (App::frontend()->ctx->posts !== null && App::plugins()->moduleExists('featuredMedia')) {
-            App::frontend()->ctx->featured = new ArrayObject(App::media()->getPostMedia((int) App::frontend()->ctx->posts->post_id, null, 'featured'));
-            foreach (App::frontend()->ctx->featured as $featured_i => $featured_f) {
+        if (App::frontend()->context()->posts !== null && App::plugins()->moduleExists('featuredMedia')) {
+            App::frontend()->context()->featured = new ArrayObject(App::media()->getPostMedia((int) App::frontend()->context()->posts->post_id, null, 'featured'));
+            foreach (App::frontend()->context()->featured as $featured_i => $featured_f) {
                 $GLOBALS['featured_i'] = $featured_i;
                 $GLOBALS['featured_f'] = $featured_f;
             }
