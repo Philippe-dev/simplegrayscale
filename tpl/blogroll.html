@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="{{tpl:BlogLanguage}}">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="ROBOTS" content="{{tpl:BlogMetaRobots robots=" NOINDEX,NOARCHIVE"}}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}" />
+
+    <title>{{tpl:lang Links}}
+        <tpl:BlogrollPageIfTitle> - {{tpl:BlogrollPageTitle}}</tpl:BlogrollPageIfTitle> -
+        {{tpl:BlogName encode_html="1"}}
+    </title>
+
+    <link rel="contents" title="{{tpl:lang Archives}}" href="{{tpl:BlogArchiveURL}}" />
+
+    {{tpl:include src="_head.html"}}
+</head>
+
+<body id="page-top" class="dc-blogroll">
+
+    {{tpl:include src="_top.html"}}
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase"><i class="fa fa-envelope"></i> {{tpl:lang Links}}</h1>
+                    </h1>
+                    <p class="text-white">{{tpl:BlogrollPageTitle encode_html="1"}}</p>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <section id="content" class="container px-4 px-lg-5 content-section text-center" role="main">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="sr-only sr-only-focusable">{{tpl:lang Entry}}</h2>
+                <tpl:BlogrollPage>
+                    <tpl:BlogrollPageIfCategoryTitle>
+                        <h3>{{tpl:BlogrollPageCategoryTitle}}</h3>
+                    </tpl:BlogrollPageIfCategoryTitle>
+                    <dl>
+                        <tpl:BlogrollPageLinks>
+                            <dt>{{tpl:BlogrollPageLink}}</dt>
+                            <tpl:BlogrollPageIfLinkDesc>
+                                <dd>{{tpl:BlogrollPageLinkDesc}}</dd>
+                            </tpl:BlogrollPageIfLinkDesc>
+                        </tpl:BlogrollPageLinks>
+                    </dl>
+                </tpl:BlogrollPage>
+                <p><a href="#page-top" class="btn btn-circle page-scroll up js-scroll-trigger"><i class="fa fa-angle-double-up animated"></i></a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menubar Section -->
+    {{tpl:include src="_menubar.html"}}
+
+    <!-- Footer -->
+    {{tpl:include src="_footer.html"}}
+
+</body>
+
+</html>
