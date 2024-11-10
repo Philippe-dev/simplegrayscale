@@ -4,24 +4,24 @@
 <head>
 
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots}}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}" />
+	<meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}">
 
 	<title>{{tpl:BlogName encode_html="1"}}</title>
 	<meta name="description" lang="{{tpl:BlogLanguage}}" content="{{tpl:BlogDescription cut_string=" 180"
 		remove_html="1" encode_html="1" }}<tpl:PaginationIf start="0"> - {{tpl:lang page}} {{tpl:PaginationCurrent}}
-	</tpl:PaginationIf>" />
+	</tpl:PaginationIf>">
 
-	<link rel="contents" title="{{tpl:lang Entries}}" href="{{tpl:BlogPostsURL}}" />
-	<link rel="contents" title="{{tpl:lang Archives}}" href="{{tpl:BlogArchiveURL}}" />
+	<link rel="contents" title="{{tpl:lang Entries}}" href="{{tpl:BlogPostsURL}}">
+	<link rel="contents" title="{{tpl:lang Archives}}" href="{{tpl:BlogArchiveURL}}">
 	<tpl:Categories>
-		<link rel="section" href="{{tpl:CategoryURL}}" title="{{tpl:CategoryTitle encode_html=" 1"}}" />
+		<link rel="section" href="{{tpl:CategoryURL}}" title="{{tpl:CategoryTitle encode_html=" 1"}}">
 	</tpl:Categories>
 
-	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{tpl:BlogFeedURL type=" atom"}}" />
-	<link rel="meta" type="application/xbel+xml" title="Blogroll" href="{{tpl:BlogrollXbelLink}}" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{tpl:BlogFeedURL type=" atom"}}">
+	<link rel="meta" type="application/xbel+xml" title="Blogroll" href="{{tpl:BlogrollXbelLink}}">
 
 	{{tpl:include src="_head.html"}}
 </head>

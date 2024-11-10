@@ -1,9 +1,5 @@
 'use strict';
 $(function () {
-    // only allow original size
-    $('input[name="src"]:last').prop("checked", true).trigger('change');
-    $('input[name="src"]').attr('disabled', true);
-
     $('#media-select-cancel').on('click', function () {
         window.close();
     });

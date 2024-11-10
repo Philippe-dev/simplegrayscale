@@ -4,14 +4,14 @@
 <head>
 
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots}}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="ROBOTS" content="{{tpl:BlogMetaRobots}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}" />
+	<meta name="author" content="{{tpl:BlogEditor encode_html=" 1"}}">
 
 	<title>{{tpl:EntryTitle encode_html="1"}} - {{tpl:BlogName encode_html="1"}}</title>
 	<meta name="description" lang="{{tpl:EntryLang}}" content="{{tpl:EntryContent full=" 1" encode_html="1"
-		remove_html="1" cut_string="180" }}" />
+		remove_html="1" cut_string="180" }}">
 
 	{{tpl:include src="_head.html"}}
 
@@ -183,7 +183,7 @@
 							<dl>
 								<dd class="comment-preview">{{tpl:CommentPreviewContent}}</dd>
 							</dl>
-							<p class="buttons"><input type="submit" class="submit" value="{{tpl:lang send}}" /></p>
+							<p class="buttons"><input type="submit" class="submit" value="{{tpl:lang send}}"></p>
 						</div>
 					</tpl:IfCommentPreview>
 
@@ -194,20 +194,20 @@
 
 						<p class="field"><label for="c_name">{{tpl:lang Name or nickname}}&nbsp;:</label>
 							<input name="c_name" id="c_name" type="text" size="30" maxlength="255"
-								value="{{tpl:CommentPreviewName encode_html=" 1"}}" />
+								value="{{tpl:CommentPreviewName encode_html=" 1"}}">
 						</p>
 
 						<p class="field"><label for="c_mail">{{tpl:lang Email address}}&nbsp;:</label>
 							<input name="c_mail" id="c_mail" type="text" size="30" maxlength="255"
-								value="{{tpl:CommentPreviewEmail encode_html=" 1"}}" />
+								value="{{tpl:CommentPreviewEmail encode_html=" 1"}}">
 						</p>
 
 						<p class="field"><label for="c_site">{{tpl:lang Website}} ({{tpl:lang optional}})&nbsp;:</label>
 							<input name="c_site" id="c_site" type="text" size="30" maxlength="255"
-								value="{{tpl:CommentPreviewSite encode_html=" 1"}}" />
+								value="{{tpl:CommentPreviewSite encode_html=" 1"}}">
 						</p>
 
-						<p style="display:none"><input name="f_mail" type="text" size="30" maxlength="255" value="" />
+						<p style="display:none"><input name="f_mail" type="text" size="30" maxlength="255" value="">
 						</p>
 
 						<p class="field"><label for="c_content">{{tpl:lang Comment}}&nbsp;:</label>
@@ -222,9 +222,9 @@
 
 					<fieldset>
 						<p class="buttons"><input type="submit" class="btn btn-default btn-lgw" name="preview"
-								value="{{tpl:lang preview}}" />
+								value="{{tpl:lang preview}}">
 							<tpl:IfCommentPreviewOptional><input type="submit" class="btn btn-submit btn-lgw"
-									value="{{tpl:lang send}}" /></tpl:IfCommentPreviewOptional>
+									value="{{tpl:lang send}}"></tpl:IfCommentPreviewOptional>
 						</p>
 					</fieldset>
 				</form>

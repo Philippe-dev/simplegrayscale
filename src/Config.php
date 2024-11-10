@@ -258,7 +258,7 @@ class Config extends Process
         echo '<div class="box theme">';
 
         echo '<p> ' .
-        '<img id="default-image-thumb-src" alt="' . __('Thumbnail') . '" src="' . App::backend()->images['default-image-tb-url'] . '" width="240" height="160" />' .
+        '<img id="default-image-thumb-src" alt="' . __('Thumbnail') . '" src="' . App::backend()->images['default-image-tb-url'] . '" width="240" height="160">' .
         '</p>';
 
         echo '<p class="simplegrayscale-buttons"><button type="button" id="default-image-selector">' . __('Change') . '</button>' .
@@ -279,7 +279,7 @@ class Config extends Process
             echo '<div class="box theme">';
 
             echo '<p> ' .
-            '<img id="random-image-' . $i . '-thumb-src" alt="' . __('Thumbnail') . '" src="' . App::backend()->images['random-image-' . $i . '-tb-url'] . '" width="240" height="160" />' .
+            '<img id="random-image-' . $i . '-thumb-src" alt="' . __('Thumbnail') . '" src="' . App::backend()->images['random-image-' . $i . '-tb-url'] . '" width="240" height="160">' .
             '</p>';
 
             echo '<p class="simplegrayscale-buttons"><button type="button" id="random-image-' . $i . '-selector">' . __('Change') . '</button>' .
@@ -292,8 +292,8 @@ class Config extends Process
         }
 
         echo '</div>';
-        echo '<p><input type="hidden" name="conf_tab" value="images" /></p>';
-        echo '<p class="clear"><input type="submit" value="' . __('Save') . '" />' . App::nonce()->getFormNonce() . '</p>';
+        echo '<p><input type="hidden" name="conf_tab" value="images"></p>';
+        echo '<p class="clear"><input type="submit" value="' . __('Save') . '">' . App::nonce()->getFormNonce() . '</p>';
         echo form::hidden(['theme-url'], My::fileURL(''));
         echo form::hidden(['change-button-id'], '');
         echo '</form>';
@@ -340,8 +340,8 @@ class Config extends Process
             '</tbody>' .
             '</table></div>';
         echo '</div>';
-        echo '<p><input type="hidden" name="conf_tab" value="stickers" /></p>';
-        echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '" />' . App::nonce()->getFormNonce() . '</p>';
+        echo '<p><input type="hidden" name="conf_tab" value="stickers"></p>';
+        echo '<p class="clear">' . form::hidden('ds_order', '') . '<input type="submit" value="' . __('Save') . '">' . App::nonce()->getFormNonce() . '</p>';
         echo '</form>';
 
         echo '</div>'; // Close tab
