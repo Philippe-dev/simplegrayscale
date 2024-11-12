@@ -1,4 +1,4 @@
-$(function () {
+dotclear.ready(() => {
     // default image
     $('#default-image-selector').on('click', function (e) {
         $('input[name="change-button-id"]').val(this.id);
