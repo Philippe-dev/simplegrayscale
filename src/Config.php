@@ -15,14 +15,16 @@ declare(strict_types=1);
 namespace Dotclear\Theme\simplegrayscale;
 
 use Dotclear\App;
-use Dotclear\Core\Process;
+use Dotclear\Helper\Process\TraitProcess;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Backend\Notices;
 use Exception;
 use form;
 
-class Config extends Process
+class Config
 {
+    use TraitProcess;
+    
     public static function init(): bool
     {
         // limit to backend permissions
