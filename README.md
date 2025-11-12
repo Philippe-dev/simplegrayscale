@@ -4,8 +4,6 @@
 
 A Dotclear theme based on Start Bootstrap Grayscale template (see below)
 
-A Dotclear theme based on Start Bootstrap Grayscale template (see below)
-
 [Grayscale](http://startbootstrap.com/template-overviews/grayscale/)
 
 Ce thème utilise le plugin Simple Menu pour la navigation en haut de page.
