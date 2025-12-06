@@ -1,12 +1,12 @@
 # Simple Grayscale theme for Dotclear
 
-![Screenshot](screenshot.jpg)
+[Grayscale](http://startbootstrap.com//)
 
-A Dotclear theme based on Start Bootstrap Grayscale template (see below)
-
-[Grayscale](http://startbootstrap.com/template-overviews/grayscale/)
+## Menu
 
 Ce thème utilise le plugin Simple Menu pour la navigation en haut de page.
+
+## Configurateur
 
 La configuration du thème permet de choisir :
 
