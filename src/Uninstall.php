@@ -1,13 +1,16 @@
 <?php
-/**
+/*
  * @brief Simple Grayscale, a theme for Dotclear 2
  *
  * @package Dotclear
  * @subpackage Themes
  *
- * @author Philippe aka amalgame and contributors
+ * @author Start Bootstrap and Philippe aka amalgame
+ *
+ * @copyright Philippe Hénaff philippe@dissitou.org
  * @copyright GPL-2.0
  */
+
 declare(strict_types=1);
 
 namespace Dotclear\Theme\simplegrayscale;
@@ -19,7 +22,7 @@ use Dotclear\Plugin\Uninstaller\Uninstaller;
 class Uninstall
 {
     use TraitProcess;
-    
+
     public static function init(): bool
     {
         return self::status(My::checkContext(My::UNINSTALL));
@@ -40,7 +43,7 @@ class Uninstall
         // $var   = My::id(); // Var sub-folder
 
         // Database table name
-        // $table = dcCore::app()->prefix . 'simplegrayscale';
+        // $table = App::con()->prefix() . 'simplegrayscale';
 
         $user_actions = [
 
