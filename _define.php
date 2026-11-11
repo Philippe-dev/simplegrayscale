@@ -15,10 +15,10 @@ if (isset($this) && is_object($this) && method_exists($this, 'registerModule') &
         'Simple Grayscale',
         'Simple Grayscale Bootstrap 5 theme for Dotclear',
         'Philippe aka amalgame and contributors',
-        '4.10',
+        '4.11',
         [
-            'date'              => '2026-10-30T00:00:08+0100',
-            'requires'          => [['core', '2.39']],
+            'date'              => '2026-11-11T00:00:08+0100',
+            'requires'          => [['core', '2.40']],
             'standalone_config' => true,
             'type'              => 'theme',
             'tplset'            => 'mustek',
